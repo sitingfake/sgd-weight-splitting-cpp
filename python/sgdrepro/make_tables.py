@@ -195,16 +195,17 @@ def make_equivalence_summary(raw_rq2_dir: Path, out_dir: Path):
 
 def to_markdown_table(df: pd.DataFrame) -> str:
     """Format DataFrame as GitHub-flavored Markdown table without tabulate."""
-    headers = [str(col) for col in df.columns]
+    headers = [str(col).replace("|", "\\|") for col in df.columns]
     lines = ["| " + " | ".join(headers) + " |"]
     lines.append("| " + " | ".join(["---"] * len(headers)) + " |")
     for _, row in df.iterrows():
         row_str = []
         for val in row:
             if isinstance(val, float):
-                row_str.append(f"{val:.4f}" if abs(val) < 1e5 and abs(val) > 1e-4 else f"{val:.2e}")
+                s = f"{val:.4f}" if abs(val) < 1e5 and abs(val) > 1e-4 else f"{val:.2e}"
             else:
-                row_str.append(str(val))
+                s = str(val)
+            row_str.append(s.replace("|", "\\|"))
         lines.append("| " + " | ".join(row_str) + " |")
     return "\n".join(lines) + "\n"
 

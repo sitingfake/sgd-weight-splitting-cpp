@@ -98,9 +98,9 @@ All empirical metrics below originate directly from raw JSON outputs in `results
 | **H1-b** | Direct update scales $\sim O(n)$, Scaled scales $\le O(n^{0.35})$ | Direct slope $\in [0.7, 1.1]$; Scaled slope $\le 0.35$ | Direct slope: 1.009; Scaled slope: 0.123 | **SUPPORTED** |
 | **H1-c** | Dense data (100%) yields identical asymptotic order of cost | Density 100%: $0.5 \le t_\text{dir}/t_\text{sc} \le 3.0$ | Observed ratio: 1.18x | **SUPPORTED** |
 | **H1-d** | Scaled per-update cost is invariant to sample count $m$ | Grid C: $\max(t_\text{sc}) / \min(t_\text{sc}) \le 1.3$ | Observed ratio: 1.08 | **SUPPORTED** |
-| **H1-e** | C++ Direct and C++ Scaled converge to identical solutions | $\|w_\text{sv} - w_\text{dir}\| / \|w\| < 10^{-10}$ | Maximum discrepancy: $5.60 \times 10^{-15}$ | **SUPPORTED** |
-| **H2-a** | C++ Scaled is numerically equivalent to scikit-learn | $|\Delta \text{RMSE}| / \text{RMSE} < 10^{-6}$ & $\|\Delta w\| / \|w\| < 10^{-10}$ | Relative RMSE error: $0.00 \times 10^0$; Weight error: $0.00 \times 10^0$ | **SUPPORTED** |
-| **H2-b** | C++ Scaled and scikit-learn match Ridge reference distance | $|d_\text{cpp} - d_\text{sk}| / d_\text{sk} < 10^{-6}$ across all epochs | Relative discrepancy: $0.00 \times 10^0$ across all epochs | **SUPPORTED** |
+| **H1-e** | C++ Direct and C++ Scaled converge to identical solutions | $\lVert w_\text{sv} - w_\text{dir} \rVert / \lVert w \rVert < 10^{-10}$ | Maximum discrepancy: $5.60 \times 10^{-15}$ | **SUPPORTED** |
+| **H2-a** | C++ Scaled is numerically equivalent to scikit-learn | $\lvert \Delta \text{RMSE} \rvert / \text{RMSE} < 10^{-6}$ and $\lVert \Delta w \rVert / \lVert w \rVert < 10^{-10}$ | Relative RMSE error: $0.00 \times 10^0$; Weight error: $0.00 \times 10^0$ | **SUPPORTED** |
+| **H2-b** | C++ Scaled and scikit-learn match Ridge reference distance | $\lvert d_\text{cpp} - d_\text{sk} \rvert / d_\text{sk} < 10^{-6}$ across all epochs | Relative discrepancy: $0.00 \times 10^0$ across all epochs | **SUPPORTED** |
 
 ---
 
@@ -138,7 +138,7 @@ Across all three real-world housing datasets (Taiwan Real Estate, California Hou
 | **King County** | 1 | 215,217.79 | 215,217.79 | $0.00 \times 10^0$ | $0.00 \times 10^0$ | **PASS** |
 | **King County** | 100 | 215,620.04 | 215,620.04 | $0.00 \times 10^0$ | $0.00 \times 10^0$ | **PASS** |
 
-Both implementations steadily converge toward the exact analytical Ridge reference solution: on California Housing, the relative distance $\|w - w_\text{ridge}\| / \|w_\text{ridge}\|$ shrinks from 1.231 at $E=1$ down to 0.0155 at $E=500$.
+Both implementations steadily converge toward the exact analytical Ridge reference solution: on California Housing, the relative distance $\lVert w - w_\text{ridge} \rVert / \lVert w_\text{ridge} \rVert$ shrinks from 1.231 at $E=1$ down to 0.0155 at $E=500$.
 
 #### Figure S2: Held-out Test RMSE Convergence vs. Ridge Analytical Baseline
 ![Figure S2: RQ2 RMSE Convergence](results/figures/figS2_rq2_rmse.png)
@@ -151,7 +151,7 @@ Both implementations steadily converge toward the exact analytical Ridge referen
 
 ### What is Exactly Guaranteed
 1. **Sample Traversal & Step Indices**: Global step counter $t$ advances continuously across epochs; samples are processed in exact row order with `shuffle=False`.
-2. **Learning Rate Formulation**: Pinned `invscaling` schedule $\eta_t = \eta_0 / t^{\text{power\_t}}$ matches Cython's internal float64 calculations.
+2. **Learning Rate Formulation**: Pinned `invscaling` schedule $\eta_t = \eta_0 / t^p$ (where exponent $p =$ `power_t`) matches Cython's internal float64 calculations.
 3. **Weight Vector & Bias Updates**: Scale factor updates, gradient calculations, gradient clipping (`MAX_FLOAT = 1e10`), and unpenalized intercept updates (`intercept_decay = 1.0`) reproduce Cython's `plain_sgd` logic step-for-step.
 4. **Numerical Parity**: Discrepancies between C++ and scikit-learn are zero to machine precision ($< 10^{-10}$ relative weight error, $< 10^{-9}$ intercept error).
 

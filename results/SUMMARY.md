@@ -10,9 +10,9 @@
 | **H1-b** | Direct update scales $\sim$ linearly with $n$, while Scaled scales $\le O(n^{0.35})$ | Direct log-log slope $\in [0.7, 1.1]$; Scaled slope $\le 0.35$ | Direct slope: 1.009; Scaled slope: 0.123 | **SUPPORTED** |
 | **H1-c** | Dense data (100%) yields identical asymptotic order of cost | Density 100%: $0.5 \le t_\text{dir}/t_\text{sc} \le 3.0$ | Observed ratio: 1.18x | **SUPPORTED** |
 | **H1-d** | Scaled per-update cost is invariant to sample count $m$ | Grid C: $\max(t_\text{sc}) / \min(t_\text{sc}) \le 1.3$ | Observed ratio: 1.08 | **SUPPORTED** |
-| **H1-e** | C++ Direct and C++ Scaled converge to identical solutions | $\|w_\text{sv} - w_\text{dir}\| / \|w\| < 10^{-10}$ | Maximum discrepancy: 5.60e-15 | **SUPPORTED** |
-| **H2-a** | C++ Scaled is mathematically and numerically equivalent to scikit-learn | $|\Delta \text{RMSE}| / \text{RMSE} < 10^{-6}$ & $\|\Delta w\| / \|w\| < 10^{-10}$ | Max relative RMSE error: 0.00e+00; Max weight error: 0.00e+00 | **SUPPORTED** |
-| **H2-b** | C++ Scaled and scikit-learn match Ridge reference distance | $|d_\text{cpp} - d_\text{sk}| / d_\text{sk} < 10^{-6}$ across all epochs | Maximum distance discrepancy: 0.00e+00 | **SUPPORTED** |
+| **H1-e** | C++ Direct and C++ Scaled converge to identical solutions | $\lVert w_\text{sv} - w_\text{dir} \rVert / \lVert w \rVert < 10^{-10}$ | Maximum discrepancy: 5.60e-15 | **SUPPORTED** |
+| **H2-a** | C++ Scaled is mathematically and numerically equivalent to scikit-learn | $\lvert \Delta \text{RMSE} \rvert / \text{RMSE} < 10^{-6}$ and $\lVert \Delta w \rVert / \lVert w \rVert < 10^{-10}$ | Max relative RMSE error: 0.00e+00; Max weight error: 0.00e+00 | **SUPPORTED** |
+| **H2-b** | C++ Scaled and scikit-learn match Ridge reference distance | $\lvert d_\text{cpp} - d_\text{sk} \rvert / d_\text{sk} < 10^{-6}$ across all epochs | Maximum distance discrepancy: 0.00e+00 | **SUPPORTED** |
 
 ---
 

@@ -143,17 +143,17 @@ def generate_summary():
         ),
         (
             f"| **H1-e** | C++ Direct and C++ Scaled converge to identical solutions | "
-            f"$\\|w_\\text{{sv}} - w_\\text{{dir}}\\| / \\|w\\| < 10^{{-10}}$ | "
+            f"$\\lVert w_\\text{{sv}} - w_\\text{{dir}} \\rVert / \\lVert w \\rVert < 10^{{-10}}$ | "
             f"Maximum discrepancy: {max_rel_w_dir:.2e} | **SUPPORTED** |"
         ),
         (
             f"| **H2-a** | C++ Scaled is mathematically and numerically equivalent to scikit-learn | "
-            f"$|\\Delta \\text{{RMSE}}| / \\text{{RMSE}} < 10^{{-6}}$ & $\\|\\Delta w\\| / \\|w\\| < 10^{{-10}}$ | "
+            f"$\\lvert \\Delta \\text{{RMSE}} \\rvert / \\text{{RMSE}} < 10^{{-6}}$ and $\\lVert \\Delta w \\rVert / \\lVert w \\rVert < 10^{{-10}}$ | "
             f"Max relative RMSE error: {df_rq2['rel_rmse'].max():.2e}; Max weight error: {df_rq2['rel_w'].max():.2e} | **SUPPORTED** |"
         ),
         (
             f"| **H2-b** | C++ Scaled and scikit-learn match Ridge reference distance | "
-            f"$|d_\\text{{cpp}} - d_\\text{{sk}}| / d_\\text{{sk}} < 10^{{-6}}$ across all epochs | "
+            f"$\\lvert d_\\text{{cpp}} - d_\\text{{sk}} \\rvert / d_\\text{{sk}} < 10^{{-6}}$ across all epochs | "
             f"Maximum distance discrepancy: {df_rq2['rel_d'].max():.2e} | **SUPPORTED** |"
         ),
         "",
