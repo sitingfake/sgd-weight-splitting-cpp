@@ -119,7 +119,6 @@ C++ split is about 1.7x to 2.2x faster than `SGDRegressor` on Grid A and 1.2x to
 ├── data/                      # Processed binary CSR datasets (gitignored)
 ├── docs/
 │   ├── DATA.md                # Dataset provenance, attributes, and preprocessing
-│   ├── DECISIONS.md           # Methodological and architectural decision log
 │   ├── LIMITATIONS.md         # Study scope, boundaries, and hardware constraints
 │   └── sklearn_source_audit.md# Detailed Cython source code audit
 ├── results/

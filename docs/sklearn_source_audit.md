@@ -51,8 +51,8 @@ Expected relative discrepancy between direct and scaled updates across machine d
 
 ---
 
-## 3. Discrepancies and Adjustments vs. Original Reading Report
-All deviations between the original reading report and verified ground truth are cataloged in `docs/DECISIONS.md`:
+## 3. Verified Implementations vs. Original Reading Report
+Key verified technical alignments with ground truth include:
 1. **Ridge reference penalty**: Confirmed exact objective alignment $\alpha_{\text{Ridge}} = m_{\text{train}} \alpha_{\text{SGD}}$.
 2. **Scikit-learn version**: Confirmed installed scikit-learn version is **1.9.1**.
 3. **`optimal` initial learning rate**: Verified $\eta_0 = 10.0$ at $\alpha = 10^{-4}$.

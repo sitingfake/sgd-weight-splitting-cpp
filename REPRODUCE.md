@@ -185,7 +185,7 @@ The script `python/sgdrepro/compare_reference.py` checks:
 | OpenML King County download fails | Network connectivity issue or OpenML API rate limiting | Re-run `make data`. `prep_rq2.py` will retry streaming the raw ARFF archive. |
 | Out of Memory (OOM) during Grid C generation | Machine has insufficient RAM for $m = 10^6, n = 10,000$ | Run `python -m sgdrepro.gen_rq1 --quick` to generate smaller sample grids. |
 | Timing IQR / median $> 5\%$ | Background CPU processes or thermal throttling | Close intensive applications (web browsers, IDE indexing). Run `make pilot` to confirm quiet state. |
-| Equivalence test failure (`test_ladder.py`) | Floating-point contraction or architecture divergence | Ensure C++ binary is compiled with `-O2 -DNDEBUG` without `-ffast-math`. Check `docs/DECISIONS.md` Decision 17. |
+| Equivalence test failure (`test_ladder.py`) | Floating-point contraction or architecture divergence | Ensure C++ binary is compiled with `-O2 -DNDEBUG` without `-ffast-math`. Check `docs/LIMITATIONS.md`. |
 
 ---
 
