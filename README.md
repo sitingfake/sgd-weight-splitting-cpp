@@ -254,12 +254,6 @@ The numbering matches the accompanying paper.
 
 ---
 
-## 10. Citation
-
-If you use this code, please cite the accompanying paper: [citation and DOI to be added after the release is archived on Zenodo].
-
----
-
-## 11. AI Assistance Declaration
+## 10. AI Assistance Declaration
 
 The text of the accompanying paper was written with the help of Claude Sonnet 5.5 (free web version, Anthropic), used for rewriting and editing the text and for drafting the reference list. Claude / Gemini AI Assistant (via Antigravity IDE) was employed as an automated pair-programming assistant for scaffold generation, script orchestration, Cython source auditing, and Markdown formatting. The author reviewed all outputs, audited the mathematical and algorithmic implementations, and takes full responsibility for all content in the paper and repository.
