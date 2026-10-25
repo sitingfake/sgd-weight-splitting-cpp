@@ -29,9 +29,9 @@ All metrics below come from the raw JSON outputs in `results/raw/` (Git commit `
 | **H1-b** | Direct cost grows as $O(n)$, split cost is nearly flat | Direct slope $\in [0.7, 1.1]$; split slope $\le 0.35$ | Direct: 1.009; split: 0.123 | **SUPPORTED** |
 | **H1-c** | On dense data (100%) the two forms have the same order of cost | $0.5 \le t_\text{dir}/t_\text{sc} \le 3.0$ at 100% density | 1.18x | **SUPPORTED** |
 | **H1-d** | Split cost per step does not depend on the number of samples $m$ | Grid C: $\max(t_\text{sc}) / \min(t_\text{sc}) \le 1.3$ | 1.08 | **SUPPORTED** |
-| **H1-e** | C++ direct and C++ split give the same solution | $\|w_\text{sv} - w_\text{dir}\| / \|w\| < 10^{-10}$ | Relative discrepancy $\le 7.44 \times 10^{-15}$ (float64 rounding level) | **SUPPORTED** |
-| **H2-a** | C++ split is numerically equivalent to scikit-learn | $\|\Delta \text{RMSE}\| / \text{RMSE} < 10^{-6}$ and $\|\Delta w\| / \|w\| < 10^{-10}$ | Exactly 0 on all 15 pairs (bit-for-bit in this environment) | **SUPPORTED** |
-| **H2-b** | C++ split and scikit-learn follow the same trajectory to the Ridge solution | $\|d_\text{cpp} - d_\text{sk}\| / d_\text{sk} < 10^{-6}$ at every epoch | Exactly 0 at every epoch | **SUPPORTED** |
+| **H1-e** | C++ direct and C++ split give the same solution | $\lVert w_\text{sv} - w_\text{dir} \rVert / \lVert w \rVert < 10^{-10}$ | Relative discrepancy $\le 7.44 \times 10^{-15}$ (float64 rounding level) | **SUPPORTED** |
+| **H2-a** | C++ split is numerically equivalent to scikit-learn | $\lvert \Delta \text{RMSE} \rvert / \text{RMSE} < 10^{-6}$ and $\lVert \Delta w \rVert / \lVert w \rVert < 10^{-10}$ | Exactly 0 on all 15 pairs (bit-for-bit in this environment) | **SUPPORTED** |
+| **H2-b** | C++ split and scikit-learn follow the same trajectory to the Ridge solution | $\lvert d_\text{cpp} - d_\text{sk} \rvert / d_\text{sk} < 10^{-6}$ at every epoch | Exactly 0 at every epoch | **SUPPORTED** |
 
 ### RQ1: Cost per Step
 
@@ -66,7 +66,7 @@ C++ split is about 1.7x to 2.2x faster than `SGDRegressor` on Grid A and 1.2x to
 
 **Equivalence.** On all 15 pairs (3 datasets x 5 epoch budgets $E \in \{1, 5, 20, 100, 500\}$), the relative weight error, relative RMSE error, and the MAE and $R^2$ deviations are exactly 0, i.e. bit-for-bit identical in this environment. At every epoch the distance to the Ridge solution is also identical, so both implementations follow the same trajectory.
 
-**Convergence.** The distance to the closed-form Ridge solution, $d_\text{ridge} = \|w - w_\text{ridge}\| / \|w_\text{ridge}\|$, decreases monotonically with $E$ on all three datasets. With the `invscaling` schedule SGD has not reached the Ridge solution after 500 epochs.
+**Convergence.** The distance to the closed-form Ridge solution, $d_\text{ridge} = \lVert w - w_\text{ridge} \rVert / \lVert w_\text{ridge} \rVert$, decreases monotonically with $E$ on all three datasets. With the `invscaling` schedule SGD has not reached the Ridge solution after 500 epochs.
 
 | Dataset | Features | Test RMSE at $E=500$ (C++ = scikit-learn) | Ridge test RMSE | $d_\text{ridge}$ at $E=500$ | Time at $E=500$ (C++ split vs scikit-learn) |
 |---|---|---|---|---|---|
@@ -121,7 +121,6 @@ C++ split is about 1.7x to 2.2x faster than `SGDRegressor` on Grid A and 1.2x to
 │   ├── DATA.md                # Dataset provenance, attributes, and preprocessing
 │   ├── DECISIONS.md           # Methodological and architectural decision log
 │   ├── LIMITATIONS.md         # Study scope, boundaries, and hardware constraints
-│   ├── reading_report.pdf     # Original background study report
 │   └── sklearn_source_audit.md# Detailed Cython source code audit
 ├── results/
 │   ├── figures/               # Generated 300 DPI PNG and PDF plots
@@ -219,7 +218,7 @@ The C++ code follows the Cython code of scikit-learn 1.9.1 on these points:
 3. The order of operations: dot product, gradient clipping, shrinkage, then the add step (only when the update $u \neq 0$).
 4. Gradient clipping at $\pm 10^{12}$.
 5. An unpenalized intercept that is not shrunk and uses `intercept_decay`.
-6. The `invscaling` schedule $\eta_t = \eta_0 / t^{\text{power\_t}}$ with $t$ starting at 1 and continuing across epochs.
+6. The `invscaling` schedule $\eta_t = \eta_0 / t^p$ (where exponent $p =$ `power_t`) with $t$ starting at 1 and continuing across epochs.
 7. Sequential traversal (`shuffle=False`) and no early stopping (`tol=None`).
 
 ### What is not guaranteed
@@ -263,6 +262,4 @@ If you use this code, please cite the accompanying paper: [citation and DOI to b
 
 ## 11. AI Assistance Declaration
 
-The text of the accompanying paper was written with the help of Claude Sonnet 5.5 (free web version, Anthropic), used for rewriting and editing the text and for drafting the reference list. The author reviewed the output and is responsible for all content of the paper and of this repository.
-
-[Before publishing: if any other AI tool was used on this repository's code, scripts, tests, or documentation, list it here. The previous version of this README named "Claude / Gemini AI Assistant (via Antigravity IDE)" for scaffold generation, script orchestration, Cython source auditing, and Markdown formatting. The declaration must match what was actually used.]
+The text of the accompanying paper was written with the help of Claude Sonnet 5.5 (free web version, Anthropic), used for rewriting and editing the text and for drafting the reference list. Claude / Gemini AI Assistant (via Antigravity IDE) was employed as an automated pair-programming assistant for scaffold generation, script orchestration, Cython source auditing, and Markdown formatting. The author reviewed all outputs, audited the mathematical and algorithmic implementations, and takes full responsibility for all content in the paper and repository.
