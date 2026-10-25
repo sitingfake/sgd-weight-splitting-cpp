@@ -2,7 +2,7 @@
 
 **Verifying the Weight-Splitting Technique for L2-Regularized SGD on Sparse Data with an Independent C++17 Implementation**
 
-> **Summary.** L2 regularization forces every SGD step to shrink the whole weight vector, so the cost per step grows with the number of features $n$ even when each sample has only $k \ll n$ non-zeros. Writing the weights as $w = s \cdot v$ (a scalar and a vector) removes this cost. This repository implements both forms in pure C++17 and benchmarks them against scikit-learn's `SGDRegressor`. At $n = 10^6$, $k = 20$ the split form is **3446x faster** per step than the direct form, and on three housing datasets its weights match scikit-learn **bit-for-bit** in the measured environment.
+> **Summary.** L2 regularization forces every SGD step to shrink the whole weight vector, so the cost per step grows with the number of features $n$ even when each sample has only $k \ll n$ non-zeros. Writing the weights as $w = s \cdot v$ (a scalar and a vector) removes this cost. This repository implements both forms in pure C++17 and benchmarks them against scikit-learn's `SGDRegressor`. At $n = 10^6$, $k = 20$ the split form is **3446x faster** per step than the direct form, and on three housing datasets its weights match scikit-learn **bit-for-bit** in the measured environment. The full project paper is available at [docs/26125082.pdf](docs/26125082.pdf).
 
 ---
 
@@ -118,6 +118,7 @@ C++ split is about 1.7x to 2.2x faster than `SGDRegressor` on Grid A and 1.2x to
 │   └── data_checksums.json    # SHA-256 integrity hashes for all datasets
 ├── data/                      # Processed binary CSR datasets (gitignored)
 ├── docs/
+│   ├── 26125082.pdf           # Project paper / technical report (CS161 final project)
 │   ├── DATA.md                # Dataset provenance, attributes, and preprocessing
 │   ├── LIMITATIONS.md         # Study scope, boundaries, and hardware constraints
 │   └── sklearn_source_audit.md# Detailed Cython source code audit
