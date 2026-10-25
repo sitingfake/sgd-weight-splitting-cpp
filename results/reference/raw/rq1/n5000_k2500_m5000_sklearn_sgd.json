@@ -1,0 +1,53 @@
+{
+  "impl": "sklearn_sgd",
+  "dataset": "data\\processed\\rq1\\n5000_k2500_m5000.bin",
+  "m": 5000,
+  "n": 5000,
+  "nnz": 12500000,
+  "params": {
+    "alpha": 0.0001,
+    "schedule": "invscaling",
+    "eta0": 0.01,
+    "power_t": 0.25,
+    "optimal_init": 0.0,
+    "epochs": 3,
+    "fit_intercept": false,
+    "intercept_decay": 0.01
+  },
+  "timing": {
+    "warmup": 1,
+    "repeats": 7,
+    "loop_ns": [
+      62394750,
+      61876829,
+      75540870,
+      95676479,
+      65204579,
+      122582580,
+      82717169
+    ],
+    "median_ns": 75540870,
+    "iqr_ns": 25397159,
+    "min_ns": 61876829,
+    "max_ns": 122582580,
+    "us_per_update": 5.036058000041522,
+    "finalize_ns": 0,
+    "slope_s_per_epoch": 0.02518029000020761,
+    "overhead_s": 0.011825410000892541,
+    "linear_fit_r2_median": 0.9832625388765381
+  },
+  "n_resets": 0,
+  "diverged": false,
+  "diverged_epoch": 0,
+  "b": 0.0,
+  "build": {
+    "compiler": "Cython / scikit-learn",
+    "flags": "bundled wheel"
+  },
+  "final_loss": 0.4669060952152052,
+  "comparisons": {
+    "rel_w_sv_dir": 6.326112989666963e-15,
+    "rel_w_sv_sk": 0.0,
+    "speedup_direct_over_scaled": 1.3176137783978616
+  }
+}

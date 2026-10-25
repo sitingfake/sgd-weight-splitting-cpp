@@ -1,0 +1,25 @@
+{
+  "impl": "cpp_scaled",
+  "dataset": "kingcounty",
+  "epochs": 1,
+  "m_train": 17290,
+  "m_test": 4323,
+  "n": 17,
+  "alpha": 0.0001,
+  "metrics": {
+    "rmse": 215217.7866641558,
+    "mae": 127339.13135871188,
+    "r2": 0.693612230315471
+  },
+  "distance_to_ridge": 0.0869019007482189,
+  "train_time_ms": 0.5971,
+  "b": -0.004429644182796361,
+  "equivalence": {
+    "rel_rmse": 0.0,
+    "rel_mae": 0.0,
+    "diff_r2": 0.0,
+    "rel_w": 0.0,
+    "rel_dist_to_ridge": 0.0,
+    "passed": true
+  }
+}

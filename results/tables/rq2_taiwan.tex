@@ -1,0 +1,20 @@
+\begin{table}[htbp]
+\centering
+\begin{tabular}{lllllll}
+\toprule
+Epochs & Model & RMSE & MAE & R\^2 & ||w - w\_ridge|| / ||w\_ridge|| & Time (ms) \\
+\midrule
+- & Ridge Reference & 7.3146 & 5.3053 & 0.6811 & 0.0000 & 11.33 \\
+1 & scikit-learn SGD & 7.4291 & 5.5798 & 0.6710 & 0.4735 & 0.93 \\
+1 & C++ Scaled & 7.4291 & 5.5798 & 0.6710 & 0.4735 & 0.01 \\
+5 & scikit-learn SGD & 7.2727 & 5.3594 & 0.6847 & 0.2796 & 1.09 \\
+5 & C++ Scaled & 7.2727 & 5.3594 & 0.6847 & 0.2796 & 0.04 \\
+20 & scikit-learn SGD & 7.2931 & 5.2927 & 0.6829 & 0.1008 & 0.94 \\
+20 & C++ Scaled & 7.2931 & 5.2927 & 0.6829 & 0.1008 & 0.15 \\
+100 & scikit-learn SGD & 7.3201 & 5.3156 & 0.6806 & 0.0108 & 2.19 \\
+100 & C++ Scaled & 7.3201 & 5.3156 & 0.6806 & 0.0108 & 0.75 \\
+500 & scikit-learn SGD & 7.3187 & 5.3131 & 0.6807 & 0.0071 & 8.06 \\
+500 & C++ Scaled & 7.3187 & 5.3131 & 0.6807 & 0.0071 & 3.75 \\
+\bottomrule
+\end{tabular}
+\end{table}

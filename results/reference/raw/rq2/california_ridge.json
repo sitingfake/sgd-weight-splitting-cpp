@@ -1,0 +1,17 @@
+{
+  "impl": "ridge_reference",
+  "dataset": "california",
+  "m_train": 16512,
+  "m_test": 4128,
+  "n": 8,
+  "alpha_sgd": 0.0001,
+  "alpha_ridge": 1.6512,
+  "metrics": {
+    "rmse": 0.7455407858755695,
+    "mae": 0.5331886933314122,
+    "r2": 0.5758339017562956
+  },
+  "distance_to_ridge": 0.0,
+  "train_time_ms": 1.793399998859968,
+  "b": -2.2218774366498255e-13
+}

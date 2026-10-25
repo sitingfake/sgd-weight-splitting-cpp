@@ -1,0 +1,18 @@
+# Quick/Smoke test configuration for RQ2
+
+[general]
+alpha = 1e-4
+loss = "squared_error"
+penalty = "l2"
+fit_intercept = true
+intercept_decay = 1.0
+schedule = "invscaling"
+eta0 = 0.01
+power_t = 0.25
+epochs_main = 5
+epochs_sweep = [1, 5]
+test_size = 0.2
+seed = 42
+
+[datasets]
+names = ["taiwan", "california", "kingcounty"]

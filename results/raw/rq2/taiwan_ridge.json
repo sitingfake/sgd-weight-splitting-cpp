@@ -1,0 +1,17 @@
+{
+  "impl": "ridge_reference",
+  "dataset": "taiwan",
+  "m_train": 331,
+  "m_test": 83,
+  "n": 6,
+  "alpha_sgd": 0.0001,
+  "alpha_ridge": 0.033100000000000004,
+  "metrics": {
+    "rmse": 7.31461980057736,
+    "mae": 5.305250157767036,
+    "r2": 0.6810697168143329
+  },
+  "distance_to_ridge": 0.0,
+  "train_time_ms": 11.326599997119047,
+  "b": -2.7154440307070733e-13
+}

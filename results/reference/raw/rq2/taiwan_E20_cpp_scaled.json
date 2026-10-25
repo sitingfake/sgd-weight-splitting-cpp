@@ -1,0 +1,25 @@
+{
+  "impl": "cpp_scaled",
+  "dataset": "taiwan",
+  "epochs": 20,
+  "m_train": 331,
+  "m_test": 83,
+  "n": 6,
+  "alpha": 0.0001,
+  "metrics": {
+    "rmse": 7.293080238913631,
+    "mae": 5.292652442784561,
+    "r2": 0.6829452767507509
+  },
+  "distance_to_ridge": 0.10076382172703088,
+  "train_time_ms": 0.1464,
+  "b": 0.00232289650387108,
+  "equivalence": {
+    "rel_rmse": 0.0,
+    "rel_mae": 0.0,
+    "diff_r2": 0.0,
+    "rel_w": 0.0,
+    "rel_dist_to_ridge": 0.0,
+    "passed": true
+  }
+}

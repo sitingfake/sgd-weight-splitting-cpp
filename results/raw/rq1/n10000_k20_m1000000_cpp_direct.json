@@ -1,0 +1,55 @@
+{
+  "impl": "cpp_direct",
+  "dataset": "data/processed/rq1/n10000_k20_m1000000.bin",
+  "m": 1000000,
+  "n": 10000,
+  "nnz": 20000000,
+  "params": {
+    "alpha": 0.0001,
+    "schedule": "invscaling",
+    "eta0": 0.01,
+    "power_t": 0.25,
+    "optimal_init": 0,
+    "epochs": 3,
+    "fit_intercept": false,
+    "intercept_decay": 1,
+    "max_samples": 1000000
+  },
+  "timing": {
+    "warmup": 1,
+    "repeats": 7,
+    "loop_ns": [
+      7139566300,
+      6808343000,
+      6339743700,
+      6301628900,
+      6285430800,
+      6292968900,
+      6319004300
+    ],
+    "median_ns": 6319004300,
+    "iqr_ns": 515374100,
+    "min_ns": 6285430800,
+    "max_ns": 7139566300,
+    "us_per_update": 2.106334766666667,
+    "finalize_ns": 0
+  },
+  "n_resets": 0,
+  "diverged": false,
+  "diverged_epoch": 0,
+  "b": 0,
+  "w_file": "C:/Users/ADMIN/AppData/Local/Temp/tmp4tahinok/w.bin",
+  "w_sha256": "",
+  "build": {
+    "compiler": "g++ 14.2.0",
+    "flags": "-std=c++17 -O2 -DNDEBUG -Wall -Wextra"
+  },
+  "git_commit": "7009555db62687232285404fd9dbff90e01d8204",
+  "dirty": true,
+  "final_loss": 0.42473017329106255,
+  "comparisons": {
+    "rel_w_sv_dir": 5.113053618263267e-14,
+    "rel_w_sv_sk": 0.0,
+    "speedup_direct_over_scaled": 57.069612416402876
+  }
+}

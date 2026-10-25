@@ -1,0 +1,19 @@
+# Configuration for Research Question 2 (RQ2): Convergence Quality & Trajectory
+# Evaluates C++ Scaled vs. scikit-learn SGDRegressor vs. Closed-Form Ridge Reference.
+
+[general]
+alpha = 1e-4
+loss = "squared_error"
+penalty = "l2"
+fit_intercept = true
+intercept_decay = 1.0
+schedule = "invscaling"
+eta0 = 0.01
+power_t = 0.25
+epochs_main = 100
+epochs_sweep = [1, 5, 20, 100, 500]
+test_size = 0.2
+seed = 42
+
+[datasets]
+names = ["taiwan", "california", "kingcounty"]

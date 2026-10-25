@@ -1,0 +1,17 @@
+{
+  "impl": "ridge_reference",
+  "dataset": "kingcounty",
+  "m_train": 17290,
+  "m_test": 4323,
+  "n": 17,
+  "alpha_sgd": 0.0001,
+  "alpha_ridge": 1.729,
+  "metrics": {
+    "rmse": 214473.46226211646,
+    "mae": 128154.42344968478,
+    "r2": 0.6957278318333502
+  },
+  "distance_to_ridge": 0.0,
+  "train_time_ms": 3.0761000016354956,
+  "b": 6.567051044157892e-13
+}

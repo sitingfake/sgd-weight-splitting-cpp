@@ -1,0 +1,30 @@
+# Byte-compiled / optimized / cache files
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+
+# Virtual Environment
+.venv/
+venv/
+ENV/
+
+# C++ Build outputs and binaries
+build/
+*.exe
+*.o
+*.obj
+
+# Data directory (raw downloads and preprocessed binary data)
+data/
+
+# Benchmark runtime weights dump and logs
+logs/
+results/**/*.w.bin
+results_smoke/
+
+# Temporary and IDE files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

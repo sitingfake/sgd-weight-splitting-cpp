@@ -1,0 +1,25 @@
+{
+  "impl": "cpp_scaled",
+  "dataset": "california",
+  "epochs": 100,
+  "m_train": 16512,
+  "m_test": 4128,
+  "n": 8,
+  "alpha": 0.0001,
+  "metrics": {
+    "rmse": 0.7423928990006282,
+    "mae": 0.5348096799527199,
+    "r2": 0.5794082415198192
+  },
+  "distance_to_ridge": 0.021687112100652797,
+  "train_time_ms": 45.0469,
+  "b": 0.001672025800566223,
+  "equivalence": {
+    "rel_rmse": 0.0,
+    "rel_mae": 0.0,
+    "diff_r2": 0.0,
+    "rel_w": 0.0,
+    "rel_dist_to_ridge": 0.0,
+    "passed": true
+  }
+}

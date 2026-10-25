@@ -1,0 +1,55 @@
+{
+  "impl": "cpp_scaled",
+  "dataset": "data/processed/rq1/n5000_k5000_m5000.bin",
+  "m": 5000,
+  "n": 5000,
+  "nnz": 25000000,
+  "params": {
+    "alpha": 0.0001,
+    "schedule": "invscaling",
+    "eta0": 0.01,
+    "power_t": 0.25,
+    "optimal_init": 0,
+    "epochs": 3,
+    "fit_intercept": false,
+    "intercept_decay": 1,
+    "max_samples": 5000
+  },
+  "timing": {
+    "warmup": 1,
+    "repeats": 7,
+    "loop_ns": [
+      93823100,
+      96120600,
+      91466200,
+      92586100,
+      86701800,
+      84265900,
+      85323100
+    ],
+    "median_ns": 91466200,
+    "iqr_ns": 8500000,
+    "min_ns": 84265900,
+    "max_ns": 96120600,
+    "us_per_update": 6.097746666666667,
+    "finalize_ns": 19000
+  },
+  "n_resets": 0,
+  "diverged": false,
+  "diverged_epoch": 0,
+  "b": 0,
+  "w_file": "C:/Users/ADMIN/AppData/Local/Temp/tmpeneyub5j/w.bin",
+  "w_sha256": "",
+  "build": {
+    "compiler": "g++ 14.2.0",
+    "flags": "-std=c++17 -O2 -DNDEBUG -Wall -Wextra"
+  },
+  "git_commit": "7009555db62687232285404fd9dbff90e01d8204",
+  "dirty": true,
+  "final_loss": 0.49432125860678755,
+  "comparisons": {
+    "rel_w_sv_dir": 7.44073216672075e-15,
+    "rel_w_sv_sk": 0.0,
+    "speedup_direct_over_scaled": 1.1809160105044267
+  }
+}
