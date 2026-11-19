@@ -67,3 +67,16 @@ def test_gen_rq1_determinism():
         h1 = write_csr_binary(p1, X1, y1)
         h2 = write_csr_binary(p2, X2, y2)
         assert h1 == h2
+
+
+def test_holdout_uses_training_weights_with_independent_rows_and_noise():
+    n, k, m = 1000, 20, 200
+    train_X, train_y, train_w = generate_sparse_dataset(n, k, m)
+    test_X, test_y, test_w = generate_sparse_dataset(n, k, m, train_size=m)
+    again_X, again_y, _ = generate_sparse_dataset(n, k, m, train_size=m)
+
+    np.testing.assert_array_equal(train_w, test_w)
+    assert (train_X != test_X).nnz > 0
+    assert not np.array_equal(train_y - train_X @ train_w, test_y - test_X @ test_w)
+    assert (test_X != again_X).nnz == 0
+    np.testing.assert_array_equal(test_y, again_y)

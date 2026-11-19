@@ -1,19 +1,88 @@
 {
-  "impl": "cpp_scaled",
   "dataset": "kingcounty",
-  "epochs": 20,
   "m_train": 17290,
   "m_test": 4323,
   "n": 17,
-  "alpha": 0.0001,
+  "train_sha256": "41738d31627eb77a110d95d59c6e8210ffdb7d6209e3803816c9c51f4ce95e31",
+  "test_sha256": "658a856c0a23d9867de1b33a8721a772b295e23a7c07c24cddc3ee13b5488773",
   "metrics": {
     "rmse": 215442.70870490678,
     "mae": 125356.9507678521,
     "r2": 0.6929714898466304
   },
+  "predict_timing": {
+    "warmup": 1,
+    "repeats": 7,
+    "samples_ns": [
+      23400,
+      34800,
+      39800,
+      24400,
+      24900,
+      24400,
+      24900
+    ],
+    "median_ns": 24900.0,
+    "iqr_ns": 5450.0
+  },
+  "fit_timing": {
+    "warmup": 1,
+    "repeats": 7,
+    "samples_ns": [
+      12141100,
+      12225300,
+      12267200,
+      12231700,
+      12260900,
+      12272200,
+      12263300
+    ],
+    "median_ns": 12260900.0,
+    "iqr_ns": 36750.0
+  },
+  "train_time_ms": 12.2609,
   "distance_to_ridge": 0.06320517025834096,
-  "train_time_ms": 12.3982,
-  "b": -0.002112193060995644,
+  "b": -0.0021121930609956444,
+  "epochs": 20,
+  "alpha": 0.0001,
+  "fit_intercept": true,
+  "eta0": 0.01,
+  "power_t": 0.25,
+  "schedule": "invscaling",
+  "impl": "cpp_scaled",
+  "timing": {
+    "warmup": 1,
+    "repeats": 7,
+    "loop_ns": [
+      12140600,
+      12224700,
+      12266800,
+      12231200,
+      12260600,
+      12271800,
+      12262900
+    ],
+    "fit_ns": [
+      12141100,
+      12225300,
+      12267200,
+      12231700,
+      12260900,
+      12272200,
+      12263300
+    ],
+    "median_ns": 12260600,
+    "iqr_ns": 42100,
+    "min_ns": 12140600,
+    "max_ns": 12271800,
+    "us_per_update": 0.035455754771544244,
+    "finalize_ns": 200
+  },
+  "build": {
+    "compiler": "g++ 14.2.0",
+    "flags": "-std=c++17 -O2 -DNDEBUG -Wall -Wextra"
+  },
+  "n_resets": 0,
   "equivalence": {
     "rel_rmse": 0.0,
     "rel_mae": 0.0,

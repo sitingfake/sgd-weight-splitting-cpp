@@ -434,7 +434,47 @@ def main():
     plot_fig_s2_rq2_rmse(raw_rq2, figs_dir)
     plot_fig_s3_rq2_mae(raw_rq2, figs_dir)
     plot_fig_s4_rq2_r2(raw_rq2, figs_dir)
+    plot_rq2_fit_vs_rmse(raw_rq2, figs_dir)
     print("Figures successfully generated.")
+
+
+def plot_rq2_fit_vs_rmse(raw_dir: Path, out_dir: Path):
+    """Plot the observed time and test RMSE of each fitted model."""
+    datasets = [
+        ("taiwan", "Taiwan", "10,000 NTD/ping", 1),
+        ("california", "California", "100,000 USD", 1),
+        ("kingcounty", "King County", "1,000 USD", 1000),
+    ]
+    series = [
+        ("cpp_direct", "C++ Direct", COLOR_DIRECT, MARKER_DIRECT),
+        ("cpp_scaled", "C++ Scaled", COLOR_SCALED, MARKER_SCALED),
+        ("sklearn", "scikit-learn SGD", "#30845C", MARKER_SKLEARN),
+    ]
+    fig, axes = plt.subplots(1, 3, figsize=(10, 3.25), layout="constrained")
+    for ax, (ds, title, units, scale) in zip(axes, datasets):
+        for suffix, label, color, marker in series:
+            records = sorted(
+                (load_json(path) for path in raw_dir.glob(f"{ds}_E*_{suffix}.json")),
+                key=lambda record: record["epochs"],
+            )
+            ax.plot(
+                [record["train_time_ms"] for record in records],
+                [record["metrics"]["rmse"] / scale for record in records],
+                color=color, marker=marker, markersize=4, linewidth=1.25, label=label,
+            )
+        ridge = load_json(raw_dir / f"{ds}_ridge.json")
+        ax.scatter(
+            ridge["train_time_ms"], ridge["metrics"]["rmse"] / scale,
+            color=COLOR_REF, marker="D", s=20, label="Ridge", zorder=3,
+        )
+        ax.set(xscale="log", title=title, xlabel="Fit (ms)", ylabel=f"RMSE ({units})")
+        ax.grid(axis="y", color="#DCE2E7", linewidth=0.7)
+        ax.spines[["top", "right"]].set_visible(False)
+    handles, labels = axes[0].get_legend_handles_labels()
+    fig.legend(handles, labels, loc="outside lower center", ncols=4, frameon=False)
+    fig.savefig(out_dir / "fig4_rq2_fit_vs_rmse.png", dpi=300)
+    fig.savefig(out_dir / "fig4_rq2_fit_vs_rmse.pdf")
+    plt.close(fig)
 
 
 if __name__ == "__main__":

@@ -1,17 +1,53 @@
 {
-  "impl": "sklearn_sgd",
   "dataset": "kingcounty",
-  "epochs": 500,
   "m_train": 17290,
   "m_test": 4323,
   "n": 17,
-  "alpha": 0.0001,
+  "train_sha256": "41738d31627eb77a110d95d59c6e8210ffdb7d6209e3803816c9c51f4ce95e31",
+  "test_sha256": "658a856c0a23d9867de1b33a8721a772b295e23a7c07c24cddc3ee13b5488773",
   "metrics": {
     "rmse": 215619.85034324694,
     "mae": 125109.18052389364,
     "r2": 0.6924663913642191
   },
+  "predict_timing": {
+    "warmup": 1,
+    "repeats": 7,
+    "samples_ns": [
+      19500,
+      17500,
+      17700,
+      16200,
+      16100,
+      15800,
+      15800
+    ],
+    "median_ns": 16200.0,
+    "iqr_ns": 1650.0
+  },
+  "fit_timing": {
+    "warmup": 1,
+    "repeats": 7,
+    "samples_ns": [
+      493278900,
+      514825600,
+      556982500,
+      491627600,
+      577109600,
+      533417200,
+      559164900
+    ],
+    "median_ns": 533417200.0,
+    "iqr_ns": 54021450.0
+  },
+  "train_time_ms": 533.4172,
   "distance_to_ridge": 0.049906393272299364,
-  "train_time_ms": 461.1891000022297,
-  "b": -0.0007234487952469184
+  "b": -0.0007234487952469184,
+  "epochs": 500,
+  "alpha": 0.0001,
+  "fit_intercept": true,
+  "eta0": 0.01,
+  "power_t": 0.25,
+  "schedule": "invscaling",
+  "impl": "sklearn_sgd"
 }

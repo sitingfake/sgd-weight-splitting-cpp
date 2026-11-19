@@ -17,26 +17,38 @@
   "timing": {
     "warmup": 1,
     "repeats": 7,
-    "loop_ns": [
-      177038880,
-      83915490,
-      107544960,
-      107316330,
-      121003409,
-      191367420,
-      96346590
+    "samples_ns": [
+      155702800,
+      137963000,
+      127760000,
+      123456000,
+      122537200,
+      123068600,
+      125149300
     ],
-    "median_ns": 107544960,
-    "iqr_ns": 47189684,
-    "min_ns": 83915490,
-    "max_ns": 191367420,
-    "us_per_update": 7.169664000102786,
-    "finalize_ns": 0,
-    "slope_s_per_epoch": 0.03584832000051393,
-    "overhead_s": 0.017344650000450126,
-    "linear_fit_r2_median": 0.9441000960052957
+    "median_ns": 125149300.0,
+    "iqr_ns": 9599200.0,
+    "scope": "fit",
+    "min_ns": 122537200,
+    "max_ns": 155702800,
+    "us_per_update": 8.343286666666666
   },
-  "n_resets": 0,
+  "fit_timing": {
+    "warmup": 1,
+    "repeats": 7,
+    "samples_ns": [
+      155702800,
+      137963000,
+      127760000,
+      123456000,
+      122537200,
+      123068600,
+      125149300
+    ],
+    "median_ns": 125149300.0,
+    "iqr_ns": 9599200.0
+  },
+  "n_resets": null,
   "diverged": false,
   "diverged_epoch": 0,
   "b": 0.0,
@@ -45,9 +57,33 @@
     "flags": "bundled wheel"
   },
   "final_loss": 0.49432125860678755,
+  "metrics": {
+    "rmse": 1.0008094612074838,
+    "mae": 0.8059542317369558,
+    "r2": 0.004167974950952669
+  },
+  "predict_timing": {
+    "warmup": 1,
+    "repeats": 7,
+    "samples_ns": [
+      3943000,
+      3941600,
+      4076200,
+      3836800,
+      3862500,
+      3823000,
+      3989800
+    ],
+    "median_ns": 3941600.0,
+    "iqr_ns": 116750.0
+  },
+  "m_train": 5000,
+  "m_test": 1000,
+  "train_sha256": "a02ad9d0b4c59219af3fee9d36e9f1bf312e23b88e8ec615619578e6edc52d90",
+  "test_sha256": "29853fdb624945f448d195e3e43908dfc5689a32914944713aa2a6b5bb0d1dcd",
   "comparisons": {
     "rel_w_sv_dir": 7.44073216672075e-15,
     "rel_w_sv_sk": 0.0,
-    "speedup_direct_over_scaled": 1.1809160105044267
+    "speedup_direct_over_scaled": 1.1160290548128826
   }
 }

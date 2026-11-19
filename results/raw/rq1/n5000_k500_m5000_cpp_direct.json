@@ -19,37 +19,85 @@
     "warmup": 1,
     "repeats": 7,
     "loop_ns": [
-      26117600,
-      26178500,
-      26130300,
-      26113700,
-      26210900,
-      26335800,
-      26106900
+      24486500,
+      24439000,
+      24283900,
+      24309500,
+      24254300,
+      24089400,
+      24197700
     ],
-    "median_ns": 26130300,
-    "iqr_ns": 97200,
-    "min_ns": 26106900,
-    "max_ns": 26335800,
-    "us_per_update": 1.74202,
+    "fit_ns": [
+      24488400,
+      24455100,
+      24285300,
+      24310800,
+      24255600,
+      24090700,
+      24199400
+    ],
+    "median_ns": 24283900,
+    "iqr_ns": 241300,
+    "min_ns": 24089400,
+    "max_ns": 24486500,
+    "us_per_update": 1.6189266666666666,
     "finalize_ns": 0
   },
   "n_resets": 0,
   "diverged": false,
   "diverged_epoch": 0,
   "b": 0,
-  "w_file": "C:/Users/ADMIN/AppData/Local/Temp/tmpa2a_7pyf/w.bin",
+  "w_file": "C:/Users/ADMIN/AppData/Local/Temp/tmp6sv4byeq/w.bin",
   "w_sha256": "",
   "build": {
     "compiler": "g++ 14.2.0",
     "flags": "-std=c++17 -O2 -DNDEBUG -Wall -Wextra"
   },
-  "git_commit": "7009555db62687232285404fd9dbff90e01d8204",
+  "git_commit": "a3714955ede0fe8f25b8b4b74776e447d7470d5c",
   "dirty": true,
+  "fit_timing": {
+    "warmup": 1,
+    "repeats": 7,
+    "samples_ns": [
+      24488400,
+      24455100,
+      24285300,
+      24310800,
+      24255600,
+      24090700,
+      24199400
+    ],
+    "median_ns": 24285300.0,
+    "iqr_ns": 155450.0
+  },
   "final_loss": 0.4870332608813681,
+  "metrics": {
+    "rmse": 1.0113582755556902,
+    "mae": 0.8079564284577065,
+    "r2": 0.00585592350274744
+  },
+  "predict_timing": {
+    "warmup": 1,
+    "repeats": 7,
+    "samples_ns": [
+      391700,
+      426500,
+      420700,
+      379500,
+      450900,
+      401800,
+      337900
+    ],
+    "median_ns": 401800.0,
+    "iqr_ns": 38000.0
+  },
+  "m_train": 5000,
+  "m_test": 1000,
+  "train_sha256": "1dd6fae5fc313f79eb9706f5a77b730ff4be215318fc70a4fc209c6d6f7ac4f9",
+  "test_sha256": "e70e7f0e82b80515d4d384343b0de61d74a7978a7d7d2e8756e3c508d5a5692b",
   "comparisons": {
     "rel_w_sv_dir": 5.386717378471839e-15,
     "rel_w_sv_sk": 0.0,
-    "speedup_direct_over_scaled": 2.593681138705259
+    "speedup_direct_over_scaled": 2.949724266938756
   }
 }

@@ -19,37 +19,85 @@
     "warmup": 1,
     "repeats": 7,
     "loop_ns": [
-      6397600,
-      6416700,
-      6352000,
-      6366000,
-      6354900,
-      6323900,
-      6326200
+      6464700,
+      6452700,
+      6475700,
+      6478900,
+      6461600,
+      6418700,
+      6422500
     ],
-    "median_ns": 6354900,
-    "iqr_ns": 71400,
-    "min_ns": 6323900,
-    "max_ns": 6416700,
-    "us_per_update": 2.1183,
+    "fit_ns": [
+      6465600,
+      6474500,
+      6476500,
+      6479600,
+      6462400,
+      6419400,
+      6423100
+    ],
+    "median_ns": 6461600,
+    "iqr_ns": 53200,
+    "min_ns": 6418700,
+    "max_ns": 6478900,
+    "us_per_update": 2.1538666666666666,
     "finalize_ns": 0
   },
   "n_resets": 0,
   "diverged": false,
   "diverged_epoch": 0,
   "b": 0,
-  "w_file": "C:/Users/ADMIN/AppData/Local/Temp/tmpzea4_8fq/w.bin",
+  "w_file": "C:/Users/ADMIN/AppData/Local/Temp/tmpyrfhj65i/w.bin",
   "w_sha256": "",
   "build": {
     "compiler": "g++ 14.2.0",
     "flags": "-std=c++17 -O2 -DNDEBUG -Wall -Wextra"
   },
-  "git_commit": "7009555db62687232285404fd9dbff90e01d8204",
+  "git_commit": "a3714955ede0fe8f25b8b4b74776e447d7470d5c",
   "dirty": true,
+  "fit_timing": {
+    "warmup": 1,
+    "repeats": 7,
+    "samples_ns": [
+      6465600,
+      6474500,
+      6476500,
+      6479600,
+      6462400,
+      6419400,
+      6423100
+    ],
+    "median_ns": 6465600.0,
+    "iqr_ns": 32750.0
+  },
   "final_loss": 0.49327760407076005,
+  "metrics": {
+    "rmse": 1.0080315726470623,
+    "mae": 0.8207805004464674,
+    "r2": 0.00029052955593089624
+  },
+  "predict_timing": {
+    "warmup": 1,
+    "repeats": 7,
+    "samples_ns": [
+      12500,
+      7600,
+      10000,
+      7700,
+      6800,
+      7100,
+      9300
+    ],
+    "median_ns": 7700.0,
+    "iqr_ns": 2300.0
+  },
+  "m_train": 1000,
+  "m_test": 200,
+  "train_sha256": "6337f6d1b4e2352f6a585fc29b003388de454f6ea148f16b2fe3cd6b9aa44014",
+  "test_sha256": "b3890524452d82b6eaaafe503d850a6e887663f57200451638d753fe16607aa4",
   "comparisons": {
     "rel_w_sv_dir": 1.7180019313005371e-15,
     "rel_w_sv_sk": 0.0,
-    "speedup_direct_over_scaled": 60.23601895734597
+    "speedup_direct_over_scaled": 62.19056785370549
   }
 }

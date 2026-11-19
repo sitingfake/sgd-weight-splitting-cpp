@@ -1,17 +1,49 @@
 {
-  "impl": "ridge_reference",
   "dataset": "kingcounty",
   "m_train": 17290,
   "m_test": 4323,
   "n": 17,
-  "alpha_sgd": 0.0001,
-  "alpha_ridge": 1.729,
+  "train_sha256": "41738d31627eb77a110d95d59c6e8210ffdb7d6209e3803816c9c51f4ce95e31",
+  "test_sha256": "658a856c0a23d9867de1b33a8721a772b295e23a7c07c24cddc3ee13b5488773",
   "metrics": {
     "rmse": 214473.46226211646,
     "mae": 128154.42344968478,
     "r2": 0.6957278318333502
   },
+  "predict_timing": {
+    "warmup": 1,
+    "repeats": 7,
+    "samples_ns": [
+      16600,
+      17000,
+      16800,
+      16200,
+      16100,
+      16100,
+      15900
+    ],
+    "median_ns": 16200.0,
+    "iqr_ns": 600.0
+  },
+  "fit_timing": {
+    "warmup": 1,
+    "repeats": 7,
+    "samples_ns": [
+      1429100,
+      1439800,
+      1329300,
+      1366600,
+      1350000,
+      1353700,
+      1343200
+    ],
+    "median_ns": 1353700.0,
+    "iqr_ns": 51250.0
+  },
+  "train_time_ms": 1.3537,
   "distance_to_ridge": 0.0,
-  "train_time_ms": 3.0761000016354956,
-  "b": 6.567051044157892e-13
+  "b": 6.567051044157892e-13,
+  "impl": "ridge_reference",
+  "alpha_sgd": 0.0001,
+  "alpha_ridge": 1.729
 }

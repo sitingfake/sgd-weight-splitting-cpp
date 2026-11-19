@@ -1,17 +1,53 @@
 {
-  "impl": "sklearn_sgd",
   "dataset": "taiwan",
-  "epochs": 20,
   "m_train": 331,
   "m_test": 83,
   "n": 6,
-  "alpha": 0.0001,
+  "train_sha256": "c1bdc2d24356f755e8cf87748e24650050702d9788b9882de885c76fcc96fef2",
+  "test_sha256": "55939faca103523bba8baf6c8c081d5b417ab14a77b140a013a1368a6d6f0d58",
   "metrics": {
     "rmse": 7.293080238913631,
     "mae": 5.292652442784561,
     "r2": 0.6829452767507509
   },
+  "predict_timing": {
+    "warmup": 1,
+    "repeats": 7,
+    "samples_ns": [
+      3700,
+      3100,
+      2900,
+      3000,
+      2900,
+      3000,
+      3100
+    ],
+    "median_ns": 3000.0,
+    "iqr_ns": 150.0
+  },
+  "fit_timing": {
+    "warmup": 1,
+    "repeats": 7,
+    "samples_ns": [
+      695700,
+      622200,
+      591300,
+      601300,
+      592500,
+      590400,
+      611200
+    ],
+    "median_ns": 601300.0,
+    "iqr_ns": 24800.0
+  },
+  "train_time_ms": 0.6013,
   "distance_to_ridge": 0.10076382172703088,
-  "train_time_ms": 0.9387999998580199,
-  "b": 0.0023228965038710804
+  "b": 0.0023228965038710804,
+  "epochs": 20,
+  "alpha": 0.0001,
+  "fit_intercept": true,
+  "eta0": 0.01,
+  "power_t": 0.25,
+  "schedule": "invscaling",
+  "impl": "sklearn_sgd"
 }

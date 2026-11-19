@@ -1,17 +1,49 @@
 {
-  "impl": "ridge_reference",
   "dataset": "taiwan",
   "m_train": 331,
   "m_test": 83,
   "n": 6,
-  "alpha_sgd": 0.0001,
-  "alpha_ridge": 0.033100000000000004,
+  "train_sha256": "c1bdc2d24356f755e8cf87748e24650050702d9788b9882de885c76fcc96fef2",
+  "test_sha256": "55939faca103523bba8baf6c8c081d5b417ab14a77b140a013a1368a6d6f0d58",
   "metrics": {
     "rmse": 7.31461980057736,
     "mae": 5.305250157767036,
     "r2": 0.6810697168143329
   },
+  "predict_timing": {
+    "warmup": 1,
+    "repeats": 7,
+    "samples_ns": [
+      6200,
+      5600,
+      5000,
+      4500,
+      4400,
+      4400,
+      4300
+    ],
+    "median_ns": 4500.0,
+    "iqr_ns": 900.0
+  },
+  "fit_timing": {
+    "warmup": 1,
+    "repeats": 7,
+    "samples_ns": [
+      441600,
+      353900,
+      324000,
+      323400,
+      330300,
+      315900,
+      319500
+    ],
+    "median_ns": 324000.0,
+    "iqr_ns": 20650.0
+  },
+  "train_time_ms": 0.324,
   "distance_to_ridge": 0.0,
-  "train_time_ms": 11.326599997119047,
-  "b": -2.7154440307070733e-13
+  "b": -2.7154440307070733e-13,
+  "impl": "ridge_reference",
+  "alpha_sgd": 0.0001,
+  "alpha_ridge": 0.033100000000000004
 }

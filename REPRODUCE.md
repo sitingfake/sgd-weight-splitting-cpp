@@ -8,7 +8,7 @@ This document provides a step-by-step operational guide for reproducing all benc
 
 - **Operating System**: Windows 10/11 (with MinGW-w64 or WSL2) or Linux (Ubuntu 20.04+ / Debian 11+).
 - **C++ Compiler**: GCC $\ge$ 11.0 (tested with GCC 14.2.0) or Clang $\ge$ 14.0 supporting C++17 (`-std=c++17`).
-- **Python**: Python $\ge$ 3.11 (tested with Python 3.12.9).
+- **Python**: Python $\ge$ 3.11 (revised benchmarks tested with Python 3.12.14).
 - **RAM**: Minimum 16 GB (Grid C dataset `n=10,000, m=1,000,000` requires ~3.2 GB RAM during matrix instantiation).
 - **Disk Space**: $\sim$ 2.5 GB for raw and processed binary datasets (`data/`).
 - **Estimated Runtime**:
@@ -57,9 +57,23 @@ make build
 
 This invokes:
 ```bash
-g++ -std=c++17 -O2 -DNDEBUG -Wall -Wextra -Icpp/include -o build/sgd_cpp.exe cpp/src/main.cpp
+g++ -std=c++17 -O2 -DNDEBUG -Wall -Wextra -Icpp/include -o build/sgd_cpp.exe cpp/src/main.cpp -static
 ```
 Verify that compilation completes warning-free and produces `build/sgd_cpp.exe` (or `build/sgd_cpp` on POSIX systems).
+
+The Windows build links the MinGW runtime statically so `sgd_cpp.exe` can run without `libstdc++-6.dll` on PATH. With a working virtual environment and processed datasets, the following commands run both benchmarks from PowerShell.
+
+```powershell
+New-Item -ItemType Directory -Force build | Out-Null
+g++ -std=c++17 -O2 -DNDEBUG -Wall -Wextra -Icpp/include -o build/sgd_cpp.exe cpp/src/main.cpp -static
+$env:PYTHONPATH = "$PWD/python"
+$env:OMP_NUM_THREADS = '1'
+$env:OPENBLAS_NUM_THREADS = '1'
+$env:MKL_NUM_THREADS = '1'
+$env:NUMEXPR_NUM_THREADS = '1'
+.\.venv\Scripts\python.exe -m sgdrepro.run_rq1
+.\.venv\Scripts\python.exe -m sgdrepro.run_rq2
+```
 
 ---
 
@@ -85,7 +99,7 @@ Before running benchmarks, the numerical equivalence test suite **must pass**:
 make test
 ```
 
-This executes all 38 pytest unit and step-ladder tests in `tests/`:
+This executes all 39 pytest unit and step-ladder tests in `tests/`:
 - Step ladder tests ($N \in \{1, 2, 3, 10, 100, 1000\}$): Verifies that C++ Direct, C++ Scaled, and scikit-learn produce identical weights at every intermediate iteration.
 - Shrinkage, clipping, schedule, and CSR reader component tests.
 - Ridge regularization equivalence test ($\alpha_{\text{ridge}} = m_{\text{train}} \cdot \alpha_{\text{sgd}}$).
@@ -110,13 +124,15 @@ This runs minimal configurations and measures interquartile range (IQR) noise. T
 ```bash
 make rq1
 ```
-Runs 12 synthetic datasets across C++ Direct, C++ Scaled, and scikit-learn (7 repetitions each). Raw JSON files are saved to `results/raw/rq1/`.
+Runs 12 synthetic configurations across C++ Direct, C++ Scaled, and scikit-learn at the same three epochs (one warmup and seven timed repetitions). For each configuration, the runner generates an independent test set with one fifth as many rows, the same ground-truth weights, and a separate random stream for features and noise. Raw JSON files are saved to `results/raw/rq1/`.
 
 ### 6.2 RQ2: Empirical Housing Convergence
 ```bash
 make rq2
 ```
-Trains all 3 empirical datasets across $E \in \{1, 5, 20, 100, 500\}$ against closed-form Ridge analytical baselines. Raw JSON files are saved to `results/raw/rq2/`.
+Runs C++ Direct, C++ Scaled, and scikit-learn SGD at $E \in \{1, 5, 20, 100, 500\}$ on each of the three housing splits. Ridge is fitted once per repetition and has no epoch budget. All models use one warmup and seven timed repetitions. Raw JSON files are saved to `results/raw/rq2/`.
+
+Both runners record the train/test sizes and hashes, the full in-memory fit samples and summary, and the test prediction samples and summary. Test RMSE, MAE, and R² are computed from the first timed prediction of the first timed model. Prediction uses the same Python matrix-vector evaluation for every model. C++ also records the time for its SGD loop, used for the Direct/Scaled comparison in RQ1. The scikit-learn per-update column divides the full fit time by the number of updates.
 
 ---
 
@@ -133,7 +149,8 @@ Output artifacts generated:
   - `rq1_gridA.{csv,md,tex}`: Dimension scaling table ($n \in [10^3, 10^6]$).
   - `rq1_gridB.{csv,md,tex}`: Density scaling table ($0.1\%$ to $100\%$).
   - `rq1_gridC.{csv,md,tex}`: Sample count invariance table ($m \in [10^3, 10^6]$).
-  - `rq2_{taiwan,california,kingcounty}.{csv,md,tex}`: Evaluation metrics vs. Ridge.
+  - `rq1_paired.{csv,md,tex}`: Fit times, test prediction times, and regression metrics for every synthetic configuration and model.
+  - `rq2_{taiwan,california,kingcounty}.{csv,md,tex}`: Paired fit, test prediction, and regression metrics for all four models.
   - `equivalence_summary.{csv,md,tex}`: Step-by-step equivalence audit.
 - **Figures** (`results/figures/`):
   - `fig1_rq1_gridA_dim.{png,pdf}`: Dimension scaling plot.
@@ -143,8 +160,11 @@ Output artifacts generated:
   - `figS2_rq2_rmse.{png,pdf}`: Test RMSE convergence vs. Ridge baseline.
   - `figS3_rq2_mae.{png,pdf}`: Test MAE convergence vs. Ridge baseline.
   - `figS4_rq2_r2.{png,pdf}`: Test R^2 score convergence vs. Ridge baseline.
+  - `fig4_rq2_fit_vs_rmse.{png,pdf}`: Fit time and test RMSE for each housing model and epoch budget.
 - **Summary**:
-  - `results/SUMMARY.md`: Formal pre-registered hypothesis verification table.
+  - `results/SUMMARY.md`: Observed values and whether they meet the benchmark thresholds.
+
+To rebuild the English paper, run `tectonic paper_en.tex` from `docs/`. With TeX Live, run `xelatex paper_en.tex` twice from the same directory. The source reads the figures in `results/figures/`.
 
 ---
 
@@ -165,7 +185,7 @@ The script `python/sgdrepro/compare_reference.py` checks:
 ## 9. Determinism and Cross-Machine Expectations
 
 1. **Synthetic Data Checksums**:
-   - Synthetic random generation uses NumPy's `np.random.default_rng(seed=42)`. While NumPy's generator algorithm is stable across minor releases, slight discrepancies in float representation can alter checksums on different platforms.
+   - Synthetic training data uses NumPy's generator initialized with `[42, n, k, m]`. The held-out generator reuses its ground-truth weights and draws test samples from the separate stream `[42, n, k, m, 1]`. Floating-point differences across platforms can change checksums.
    - If `configs/data_checksums.json` reports a checksum mismatch on a different OS, run `make test`—if the numerical equivalence ladder tests pass, the mathematical logic is fully preserved.
 2. **Timing Expectations**:
    - Absolute wall-clock times ($\mu$s/update) **will differ** across CPUs depending on clock speeds, cache sizes, and memory buses.

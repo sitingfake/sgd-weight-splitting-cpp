@@ -1,5 +1,5 @@
 # Configuration for Research Question 2 (RQ2): Convergence Quality & Trajectory
-# Evaluates C++ Scaled vs. scikit-learn SGDRegressor vs. Closed-Form Ridge Reference.
+# Evaluates C++ Direct, C++ Scaled, scikit-learn SGDRegressor, and Ridge.
 
 [general]
 alpha = 1e-4
@@ -12,6 +12,8 @@ eta0 = 0.01
 power_t = 0.25
 epochs_main = 100
 epochs_sweep = [1, 5, 20, 100, 500]
+warmup = 1
+repeats = 7
 test_size = 0.2
 seed = 42
 

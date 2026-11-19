@@ -37,6 +37,7 @@ struct BenchmarkJsonRecord {
     int warmup = 0;
     int repeats = 0;
     std::vector<int64_t> loop_ns;
+    std::vector<int64_t> fit_ns;
     int64_t median_ns = 0;
     int64_t iqr_ns = 0;
     int64_t min_ns = 0;
@@ -75,7 +76,7 @@ struct BenchmarkJsonRecord {
      */
     std::string to_json() const {
         std::ostringstream ss;
-        ss << std::setprecision(16);
+        ss << std::setprecision(17);
 
         ss << "{\n";
         ss << "  \"impl\": \"" << escape_json(impl) << "\",\n";
@@ -104,6 +105,11 @@ struct BenchmarkJsonRecord {
         ss << "    \"loop_ns\": [";
         for (size_t i = 0; i < loop_ns.size(); ++i) {
             ss << loop_ns[i] << (i + 1 < loop_ns.size() ? ", " : "");
+        }
+        ss << "],\n";
+        ss << "    \"fit_ns\": [";
+        for (size_t i = 0; i < fit_ns.size(); ++i) {
+            ss << fit_ns[i] << (i + 1 < fit_ns.size() ? ", " : "");
         }
         ss << "],\n";
         ss << "    \"median_ns\": " << median_ns << ",\n";

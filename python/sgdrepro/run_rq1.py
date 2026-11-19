@@ -17,9 +17,10 @@ import tomllib
 from typing import Any, Dict, List, Tuple
 import numpy as np
 
-from sgdrepro.binio import read_csr_binary
+from sgdrepro.binio import read_csr_binary, sha256_file
 from sgdrepro.bench_sklearn import benchmark_sklearn_sgd
-from sgdrepro.gen_rq1 import collect_unique_configurations
+from sgdrepro.evaluation import evaluate_holdout, holdout_sha256
+from sgdrepro.gen_rq1 import collect_unique_configurations, generate_sparse_dataset
 from sgdrepro.metrics import relative_weight_difference, sgd_objective_loss
 from sgdrepro.run_cpp import run_cpp_sgd
 
@@ -34,6 +35,7 @@ def run_rq1_single_dataset(
     epochs: int = 3,
     warmup: int = 1,
     repeats: int = 7,
+    seed: int = 42,
 ) -> Dict[str, Any]:
     """Execute direct, scaled, and sklearn benchmarks on one dataset."""
     base_name = bin_path.stem
@@ -44,6 +46,16 @@ def run_rq1_single_dataset(
     # 1. Load CSR matrix and target into memory
     X, y = read_csr_binary(bin_path)
     m, n = X.shape
+    k = X.nnz // m
+    train_sha256 = sha256_file(bin_path)
+    meta_path = bin_path.with_suffix(".meta.json")
+    if meta_path.exists():
+        metadata = json.loads(meta_path.read_text(encoding="utf-8"))
+        if metadata["seed"] != seed or metadata["sha256"] != train_sha256:
+            raise ValueError(f"Training data does not match the configured seed or checksum: {bin_path}")
+    m_test = max(2, m // 5)
+    X_test, y_test, _ = generate_sparse_dataset(n, k, m_test, seed=seed, train_size=m)
+    test_sha256 = holdout_sha256(X_test, y_test)
 
     # 2. C++ Direct
     print("  -> Running C++ Direct...")
@@ -94,7 +106,14 @@ def run_rq1_single_dataset(
     assert rel_w_sv_dir < 1e-10, f"Direct vs Scaled diff {rel_w_sv_dir} exceeded 1e-10 on {base_name}"
 
     # Attach comparisons to records
-    for rec in (json_dir, json_sc, json_sk):
+    for rec, weights in ((json_dir, w_dir), (json_sc, w_sc), (json_sk, w_sk)):
+        if "fit_timing" not in rec:
+            raise RuntimeError("Full fit timing is missing. Rebuild the C++ benchmark.")
+        rec.update(evaluate_holdout(X_test, y_test, weights, rec["b"], warmup, repeats))
+        rec.update(
+            m_train=m, m_test=m_test, train_sha256=train_sha256,
+            test_sha256=test_sha256,
+        )
         rec["comparisons"] = {
             "rel_w_sv_dir": rel_w_sv_dir,
             "rel_w_sv_sk": rel_w_sv_sk,
@@ -137,6 +156,7 @@ def run_all_rq1(config_path: Path, data_dir: Path, out_dir: Path, pilot: bool = 
     epochs = gen.get("epochs", 3)
     warmup = gen.get("warmup", 1)
     repeats = gen.get("repeats", 7)
+    seed = gen.get("seed", 42)
 
     configs = collect_unique_configurations(cfg)
 
@@ -162,7 +182,7 @@ def run_all_rq1(config_path: Path, data_dir: Path, out_dir: Path, pilot: bool = 
         summary = run_rq1_single_dataset(
             bin_path, out_dir, alpha=alpha, schedule=schedule,
             eta0=eta0, power_t=power_t, epochs=epochs,
-            warmup=warmup, repeats=repeats
+            warmup=warmup, repeats=repeats, seed=seed
         )
         summaries.append(summary)
 

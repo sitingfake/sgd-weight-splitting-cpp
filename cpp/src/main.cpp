@@ -157,6 +157,7 @@ int main(int argc, char* argv[]) {
 
     // Timed repetitions
     std::vector<int64_t> loop_times;
+    std::vector<int64_t> fit_times;
     std::vector<double> final_w;
     double final_b = 0.0;
     int64_t total_resets = 0;
@@ -165,24 +166,27 @@ int main(int argc, char* argv[]) {
     int diverged_epoch = 0;
 
     for (int r = 0; r < repeats; ++r) {
+        Timer fit_timer;
         if (is_scaled) {
             SgdScaledResult res = train_scaled(
                 mat, epochs, alpha, schedule_type, eta0, power_t,
                 optimal_init, fit_intercept, intercept_decay
             );
+            const int64_t fit_ns = fit_timer.elapsed_ns();
             if (res.diverged) {
                 diverged = true;
                 diverged_epoch = res.diverged_epoch;
                 break;
             }
             loop_times.push_back(res.loop_ns);
+            fit_times.push_back(fit_ns);
             final_finalize_ns = res.finalize_ns;
             total_resets = res.n_resets;
-            final_b = res.b;
 
             // Determinism check across repeats
             if (r == 0) {
                 final_w = std::move(res.w);
+                final_b = res.b;
             } else {
                 for (size_t j = 0; j < final_w.size(); ++j) {
                     if (final_w[j] != res.w[j]) {
@@ -197,19 +201,21 @@ int main(int argc, char* argv[]) {
                 mat, epochs, alpha, schedule_type, eta0, power_t,
                 optimal_init, fit_intercept, intercept_decay
             );
+            const int64_t fit_ns = fit_timer.elapsed_ns();
             if (res.diverged) {
                 diverged = true;
                 diverged_epoch = res.diverged_epoch;
                 break;
             }
             loop_times.push_back(res.loop_ns);
+            fit_times.push_back(fit_ns);
             final_finalize_ns = res.finalize_ns;
             total_resets = res.n_resets;
-            final_b = res.b;
 
             // Determinism check across repeats
             if (r == 0) {
                 final_w = std::move(res.w);
+                final_b = res.b;
             } else {
                 for (size_t j = 0; j < final_w.size(); ++j) {
                     if (final_w[j] != res.w[j]) {
@@ -253,6 +259,7 @@ int main(int argc, char* argv[]) {
     rec.warmup = warmup;
     rec.repeats = repeats;
     rec.loop_ns = loop_times;
+    rec.fit_ns = fit_times;
 
     int64_t total_updates = static_cast<int64_t>(epochs) * mat.m;
     TimingStats stats = TimingStats::compute(loop_times, total_updates);

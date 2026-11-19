@@ -19,37 +19,85 @@
     "warmup": 1,
     "repeats": 7,
     "loop_ns": [
-      65270300,
-      65253800,
-      64542100,
-      64670200,
-      64363000,
-      64300200,
-      64131400
+      64018200,
+      65484500,
+      65400900,
+      65454300,
+      65768400,
+      65505500,
+      65648300
     ],
-    "median_ns": 64542100,
-    "iqr_ns": 953600,
-    "min_ns": 64131400,
-    "max_ns": 65270300,
-    "us_per_update": 2.151403333333333,
+    "fit_ns": [
+      64020600,
+      65512600,
+      65402800,
+      65456000,
+      65770000,
+      65506800,
+      65650100
+    ],
+    "median_ns": 65484500,
+    "iqr_ns": 247400,
+    "min_ns": 64018200,
+    "max_ns": 65768400,
+    "us_per_update": 2.1828166666666666,
     "finalize_ns": 0
   },
   "n_resets": 0,
   "diverged": false,
   "diverged_epoch": 0,
   "b": 0,
-  "w_file": "C:/Users/ADMIN/AppData/Local/Temp/tmpw1hbnrlt/w.bin",
+  "w_file": "C:/Users/ADMIN/AppData/Local/Temp/tmpsuv9cgf3/w.bin",
   "w_sha256": "",
   "build": {
     "compiler": "g++ 14.2.0",
     "flags": "-std=c++17 -O2 -DNDEBUG -Wall -Wextra"
   },
-  "git_commit": "7009555db62687232285404fd9dbff90e01d8204",
+  "git_commit": "a3714955ede0fe8f25b8b4b74776e447d7470d5c",
   "dirty": true,
+  "fit_timing": {
+    "warmup": 1,
+    "repeats": 7,
+    "samples_ns": [
+      64020600,
+      65512600,
+      65402800,
+      65456000,
+      65770000,
+      65506800,
+      65650100
+    ],
+    "median_ns": 65506800.0,
+    "iqr_ns": 151950.0
+  },
   "final_loss": 0.49747545858507053,
+  "metrics": {
+    "rmse": 0.9687307882884757,
+    "mae": 0.7732786286466692,
+    "r2": 0.005771594639149558
+  },
+  "predict_timing": {
+    "warmup": 1,
+    "repeats": 7,
+    "samples_ns": [
+      28100,
+      23900,
+      35800,
+      29700,
+      25000,
+      24400,
+      23400
+    ],
+    "median_ns": 25000.0,
+    "iqr_ns": 4750.0
+  },
+  "m_train": 10000,
+  "m_test": 2000,
+  "train_sha256": "5ce1cebd589ef3b0b48ad1a4153690ad567689ca4c09d31912275b0c8e0f223b",
+  "test_sha256": "c1a93e24542405902ec6d2172639590d815bbd25ba0c7fb3220da7843b9dda11",
   "comparisons": {
     "rel_w_sv_dir": 5.460782557359718e-15,
     "rel_w_sv_sk": 0.0,
-    "speedup_direct_over_scaled": 58.27202961357891
+    "speedup_direct_over_scaled": 58.65158978952083
   }
 }

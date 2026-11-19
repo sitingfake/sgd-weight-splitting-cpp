@@ -17,26 +17,38 @@
   "timing": {
     "warmup": 1,
     "repeats": 7,
-    "loop_ns": [
-      62394750,
-      61876829,
-      75540870,
-      95676479,
-      65204579,
-      122582580,
-      82717169
+    "samples_ns": [
+      59878100,
+      60009000,
+      59484100,
+      59615900,
+      59846300,
+      60065600,
+      59592100
     ],
-    "median_ns": 75540870,
-    "iqr_ns": 25397159,
-    "min_ns": 61876829,
-    "max_ns": 122582580,
-    "us_per_update": 5.036058000041522,
-    "finalize_ns": 0,
-    "slope_s_per_epoch": 0.02518029000020761,
-    "overhead_s": 0.011825410000892541,
-    "linear_fit_r2_median": 0.9832625388765381
+    "median_ns": 59846300.0,
+    "iqr_ns": 339550.0,
+    "scope": "fit",
+    "min_ns": 59484100,
+    "max_ns": 60065600,
+    "us_per_update": 3.9897533333333333
   },
-  "n_resets": 0,
+  "fit_timing": {
+    "warmup": 1,
+    "repeats": 7,
+    "samples_ns": [
+      59878100,
+      60009000,
+      59484100,
+      59615900,
+      59846300,
+      60065600,
+      59592100
+    ],
+    "median_ns": 59846300.0,
+    "iqr_ns": 339550.0
+  },
+  "n_resets": null,
   "diverged": false,
   "diverged_epoch": 0,
   "b": 0.0,
@@ -45,9 +57,33 @@
     "flags": "bundled wheel"
   },
   "final_loss": 0.4669060952152052,
+  "metrics": {
+    "rmse": 0.9966369533143611,
+    "mae": 0.7977339551713909,
+    "r2": 0.006732511007750186
+  },
+  "predict_timing": {
+    "warmup": 1,
+    "repeats": 7,
+    "samples_ns": [
+      1767200,
+      1747500,
+      1964900,
+      1810900,
+      1780900,
+      1799600,
+      1741300
+    ],
+    "median_ns": 1780900.0,
+    "iqr_ns": 47900.0
+  },
+  "m_train": 5000,
+  "m_test": 1000,
+  "train_sha256": "fffb4ce83af01a761ffc147bd0e34354630352ba301dddf72d2e93c50f05fade",
+  "test_sha256": "1302542c7b69cbe39d7a79cdd5845b27b20b25d7044dc9f5a0cc7eee26dbdddb",
   "comparisons": {
     "rel_w_sv_dir": 6.326112989666963e-15,
     "rel_w_sv_sk": 0.0,
-    "speedup_direct_over_scaled": 1.3176137783978616
+    "speedup_direct_over_scaled": 1.0755914042325845
   }
 }

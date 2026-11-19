@@ -19,37 +19,85 @@
     "warmup": 1,
     "repeats": 7,
     "loop_ns": [
-      306000,
-      301500,
-      295700,
-      299000,
-      298600,
-      305600,
-      303100
+      295900,
+      282900,
+      283000,
+      283300,
+      283100,
+      282800,
+      282700
     ],
-    "median_ns": 301500,
-    "iqr_ns": 7000,
-    "min_ns": 295700,
-    "max_ns": 306000,
-    "us_per_update": 0.0201,
-    "finalize_ns": 17900
+    "fit_ns": [
+      297900,
+      296300,
+      285000,
+      285100,
+      284900,
+      284700,
+      284600
+    ],
+    "median_ns": 283000,
+    "iqr_ns": 500,
+    "min_ns": 282700,
+    "max_ns": 295900,
+    "us_per_update": 0.018866666666666667,
+    "finalize_ns": 1400
   },
   "n_resets": 0,
   "diverged": false,
   "diverged_epoch": 0,
   "b": 0,
-  "w_file": "C:/Users/ADMIN/AppData/Local/Temp/tmpnriq1f5y/w.bin",
+  "w_file": "C:/Users/ADMIN/AppData/Local/Temp/tmp7vdid9xf/w.bin",
   "w_sha256": "",
   "build": {
     "compiler": "g++ 14.2.0",
     "flags": "-std=c++17 -O2 -DNDEBUG -Wall -Wextra"
   },
-  "git_commit": "7009555db62687232285404fd9dbff90e01d8204",
+  "git_commit": "a3714955ede0fe8f25b8b4b74776e447d7470d5c",
   "dirty": true,
+  "fit_timing": {
+    "warmup": 1,
+    "repeats": 7,
+    "samples_ns": [
+      297900,
+      296300,
+      285000,
+      285100,
+      284900,
+      284700,
+      284600
+    ],
+    "median_ns": 285000.0,
+    "iqr_ns": 5900.0
+  },
   "final_loss": 0.5023512136741003,
+  "metrics": {
+    "rmse": 0.9993183243477151,
+    "mae": 0.7859461507420649,
+    "r2": 0.007080619672227839
+  },
+  "predict_timing": {
+    "warmup": 1,
+    "repeats": 7,
+    "samples_ns": [
+      13200,
+      12100,
+      12600,
+      11800,
+      11500,
+      11900,
+      12700
+    ],
+    "median_ns": 12100.0,
+    "iqr_ns": 800.0
+  },
+  "m_train": 5000,
+  "m_test": 1000,
+  "train_sha256": "8f3b0179ad5a42a5e1f474f21614b634a0b54924dc3d4e6cae501a64ef7d695a",
+  "test_sha256": "31b65cd773abfcfbd50e37c97866358d5a06757e378f7dc64711d88b8288d55f",
   "comparisons": {
     "rel_w_sv_dir": 5.160712430565062e-15,
     "rel_w_sv_sk": 0.0,
-    "speedup_direct_over_scaled": 54.99203980099502
+    "speedup_direct_over_scaled": 57.15053003533569
   }
 }

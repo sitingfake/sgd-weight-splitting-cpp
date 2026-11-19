@@ -26,6 +26,8 @@ def generate_sparse_dataset(
     m: int,
     seed: int = 42,
     chunk_size: int = 100_000,
+    *,
+    train_size: int | None = None,
 ) -> Tuple[sp.csr_matrix, np.ndarray, np.ndarray]:
     """
     Generate synthetic sparse regression dataset using deterministic NumPy Generator.
@@ -42,6 +44,9 @@ def generate_sparse_dataset(
         Base seed component.
     chunk_size : int
         Row chunk size to prevent excessive memory consumption.
+    train_size : int or None
+        When supplied, generate held-out rows for the model at this training
+        size. Recreate its w_star and draw features and noise from a separate stream.
 
     Returns
     -------
@@ -56,10 +61,12 @@ def generate_sparse_dataset(
         raise ValueError(f"k ({k}) cannot exceed feature count n ({n})")
 
     # Seed is uniquely conditioned on configuration tuple [42, n, k, m]
-    rng = np.random.default_rng([seed, n, k, m])
+    rng = np.random.default_rng([seed, n, k, m if train_size is None else train_size])
 
     # Dense true parameter vector w* ~ N(0, 1)
     w_star = rng.standard_normal(n, dtype=np.float64)
+    if train_size is not None:
+        rng = np.random.default_rng([seed, n, k, train_size, 1])
 
     all_indices = []
     all_data = []

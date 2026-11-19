@@ -17,26 +17,38 @@
   "timing": {
     "warmup": 1,
     "repeats": 7,
-    "loop_ns": [
-      796080,
-      1047840,
-      1036770,
-      1111680,
-      981629,
-      1160969,
-      1235100
+    "samples_ns": [
+      1680000,
+      1266900,
+      1636100,
+      1136500,
+      1117000,
+      1296600,
+      1265500
     ],
-    "median_ns": 1047840,
-    "iqr_ns": 127125,
-    "min_ns": 796080,
-    "max_ns": 1235100,
-    "us_per_update": 0.06985600004554729,
-    "finalize_ns": 0,
-    "slope_s_per_epoch": 0.00034928000022773644,
-    "overhead_s": 0.0009247599984519173,
-    "linear_fit_r2_median": 0.9924211927723261
+    "median_ns": 1266900.0,
+    "iqr_ns": 265350.0,
+    "scope": "fit",
+    "min_ns": 1117000,
+    "max_ns": 1680000,
+    "us_per_update": 0.08446
   },
-  "n_resets": 0,
+  "fit_timing": {
+    "warmup": 1,
+    "repeats": 7,
+    "samples_ns": [
+      1680000,
+      1266900,
+      1636100,
+      1136500,
+      1117000,
+      1296600,
+      1265500
+    ],
+    "median_ns": 1266900.0,
+    "iqr_ns": 265350.0
+  },
+  "n_resets": null,
   "diverged": false,
   "diverged_epoch": 0,
   "b": 0.0,
@@ -45,9 +57,33 @@
     "flags": "bundled wheel"
   },
   "final_loss": 0.5023512136741003,
+  "metrics": {
+    "rmse": 0.9993183243477151,
+    "mae": 0.7859461507420649,
+    "r2": 0.007080619672227839
+  },
+  "predict_timing": {
+    "warmup": 1,
+    "repeats": 7,
+    "samples_ns": [
+      8600,
+      8700,
+      12200,
+      9300,
+      7400,
+      11800,
+      7900
+    ],
+    "median_ns": 8700.0,
+    "iqr_ns": 2300.0
+  },
+  "m_train": 5000,
+  "m_test": 1000,
+  "train_sha256": "8f3b0179ad5a42a5e1f474f21614b634a0b54924dc3d4e6cae501a64ef7d695a",
+  "test_sha256": "31b65cd773abfcfbd50e37c97866358d5a06757e378f7dc64711d88b8288d55f",
   "comparisons": {
     "rel_w_sv_dir": 5.160712430565062e-15,
     "rel_w_sv_sk": 0.0,
-    "speedup_direct_over_scaled": 54.99203980099502
+    "speedup_direct_over_scaled": 57.15053003533569
   }
 }

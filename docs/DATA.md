@@ -75,7 +75,7 @@ This document details the provenance, licensing, attributes, and preprocessing p
 
 ## 3. Preprocessing Protocol
 
-1. **Partitioning**: Stratified random splitting with `train_test_split(test_size=0.2, random_state=42, shuffle=True)`. Split indices are archived in `split.npz`.
+1. **Partitioning**: Random splitting with `train_test_split(test_size=0.2, random_state=42, shuffle=True)`. Split indices are archived in `split.npz`.
 2. **Feature Standardization**: Features are scaled using Z-score standardization:
    $$x_{ij} \leftarrow \frac{x_{ij} - \mu_{j,\text{train}}}{\sigma_{j,\text{train}}}$$
    Parameters $\mu_j$ and $\sigma_j$ (computed with $\text{ddof} = 0$) are fit exclusively on the training partition to prevent data leakage.

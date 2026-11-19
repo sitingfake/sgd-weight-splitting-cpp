@@ -1,0 +1,94 @@
+{
+  "dataset": "taiwan",
+  "m_train": 331,
+  "m_test": 83,
+  "n": 6,
+  "train_sha256": "c1bdc2d24356f755e8cf87748e24650050702d9788b9882de885c76fcc96fef2",
+  "test_sha256": "55939faca103523bba8baf6c8c081d5b417ab14a77b140a013a1368a6d6f0d58",
+  "metrics": {
+    "rmse": 7.429120470754344,
+    "mae": 5.579807932484502,
+    "r2": 0.6710067058887346
+  },
+  "predict_timing": {
+    "warmup": 1,
+    "repeats": 7,
+    "samples_ns": [
+      3700,
+      3700,
+      3000,
+      2800,
+      2700,
+      2700,
+      2700
+    ],
+    "median_ns": 2800.0,
+    "iqr_ns": 650.0
+  },
+  "fit_timing": {
+    "warmup": 1,
+    "repeats": 7,
+    "samples_ns": [
+      8000,
+      8000,
+      8000,
+      8200,
+      8000,
+      8000,
+      8000
+    ],
+    "median_ns": 8000.0,
+    "iqr_ns": 0.0
+  },
+  "train_time_ms": 0.008,
+  "distance_to_ridge": 0.473519406168607,
+  "b": -0.0022580098168821705,
+  "epochs": 1,
+  "alpha": 0.0001,
+  "fit_intercept": true,
+  "eta0": 0.01,
+  "power_t": 0.25,
+  "schedule": "invscaling",
+  "impl": "cpp_direct",
+  "timing": {
+    "warmup": 1,
+    "repeats": 7,
+    "loop_ns": [
+      8000,
+      7900,
+      8000,
+      8200,
+      8000,
+      7900,
+      8000
+    ],
+    "fit_ns": [
+      8000,
+      8000,
+      8000,
+      8200,
+      8000,
+      8000,
+      8000
+    ],
+    "median_ns": 8000,
+    "iqr_ns": 100,
+    "min_ns": 7900,
+    "max_ns": 8200,
+    "us_per_update": 0.02416918429003021,
+    "finalize_ns": 0
+  },
+  "build": {
+    "compiler": "g++ 14.2.0",
+    "flags": "-std=c++17 -O2 -DNDEBUG -Wall -Wextra"
+  },
+  "n_resets": 0,
+  "equivalence": {
+    "rel_rmse": 1.1955364342206453e-16,
+    "rel_mae": 1.591772387951442e-16,
+    "diff_r2": 0.0,
+    "rel_w": 7.032428584583751e-16,
+    "rel_dist_to_ridge": 4.68923980796613e-16,
+    "passed": true
+  }
+}

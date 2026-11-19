@@ -1,0 +1,94 @@
+{
+  "dataset": "kingcounty",
+  "m_train": 17290,
+  "m_test": 4323,
+  "n": 17,
+  "train_sha256": "41738d31627eb77a110d95d59c6e8210ffdb7d6209e3803816c9c51f4ce95e31",
+  "test_sha256": "658a856c0a23d9867de1b33a8721a772b295e23a7c07c24cddc3ee13b5488773",
+  "metrics": {
+    "rmse": 215620.03646415725,
+    "mae": 125059.63834292721,
+    "r2": 0.6924658604440852
+  },
+  "predict_timing": {
+    "warmup": 1,
+    "repeats": 7,
+    "samples_ns": [
+      32000,
+      48300,
+      40500,
+      22500,
+      21100,
+      21100,
+      23500
+    ],
+    "median_ns": 23500.0,
+    "iqr_ns": 14450.0
+  },
+  "fit_timing": {
+    "warmup": 1,
+    "repeats": 7,
+    "samples_ns": [
+      64916400,
+      64081600,
+      63711100,
+      63868400,
+      63346400,
+      63134500,
+      63091200
+    ],
+    "median_ns": 63711100.0,
+    "iqr_ns": 734550.0
+  },
+  "train_time_ms": 63.7111,
+  "distance_to_ridge": 0.056515647658502886,
+  "b": -0.001185362209092186,
+  "epochs": 100,
+  "alpha": 0.0001,
+  "fit_intercept": true,
+  "eta0": 0.01,
+  "power_t": 0.25,
+  "schedule": "invscaling",
+  "impl": "cpp_direct",
+  "timing": {
+    "warmup": 1,
+    "repeats": 7,
+    "loop_ns": [
+      64915100,
+      64079300,
+      63708300,
+      63867700,
+      63345600,
+      63134300,
+      63091100
+    ],
+    "fit_ns": [
+      64916400,
+      64081600,
+      63711100,
+      63868400,
+      63346400,
+      63134500,
+      63091200
+    ],
+    "median_ns": 63708300,
+    "iqr_ns": 945000,
+    "min_ns": 63091100,
+    "max_ns": 64915100,
+    "us_per_update": 0.03684690572585309,
+    "finalize_ns": 0
+  },
+  "build": {
+    "compiler": "g++ 14.2.0",
+    "flags": "-std=c++17 -O2 -DNDEBUG -Wall -Wextra"
+  },
+  "n_resets": 0,
+  "equivalence": {
+    "rel_rmse": 0.0,
+    "rel_mae": 2.3271961155786986e-16,
+    "diff_r2": 0.0,
+    "rel_w": 1.1140496607510728e-14,
+    "rel_dist_to_ridge": 6.752805294225035e-15,
+    "passed": true
+  }
+}

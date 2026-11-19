@@ -19,37 +19,85 @@
     "warmup": 1,
     "repeats": 7,
     "loop_ns": [
-      6574718100,
-      6924436300,
-      6968978500,
-      6716685200,
-      6886268300,
-      6462204100,
-      6458822900
+      6665409600,
+      6569297400,
+      6570824900,
+      6565885300,
+      6597261900,
+      6769106900,
+      7696387100
     ],
-    "median_ns": 6716685200,
-    "iqr_ns": 462232200,
-    "min_ns": 6458822900,
-    "max_ns": 6968978500,
-    "us_per_update": 223.8895066666666,
+    "fit_ns": [
+      6666482200,
+      6570212600,
+      6571964100,
+      6566890400,
+      6598362400,
+      6770189700,
+      7697486600
+    ],
+    "median_ns": 6597261900,
+    "iqr_ns": 199809500,
+    "min_ns": 6565885300,
+    "max_ns": 7696387100,
+    "us_per_update": 219.90873000000002,
     "finalize_ns": 0
   },
   "n_resets": 0,
   "diverged": false,
   "diverged_epoch": 0,
   "b": 0,
-  "w_file": "C:/Users/ADMIN/AppData/Local/Temp/tmp8gclbljl/w.bin",
+  "w_file": "C:/Users/ADMIN/AppData/Local/Temp/tmpf2bizizl/w.bin",
   "w_sha256": "",
   "build": {
     "compiler": "g++ 14.2.0",
     "flags": "-std=c++17 -O2 -DNDEBUG -Wall -Wextra"
   },
-  "git_commit": "7009555db62687232285404fd9dbff90e01d8204",
+  "git_commit": "a3714955ede0fe8f25b8b4b74776e447d7470d5c",
   "dirty": true,
+  "fit_timing": {
+    "warmup": 1,
+    "repeats": 7,
+    "samples_ns": [
+      6666482200,
+      6570212600,
+      6571964100,
+      6566890400,
+      6598362400,
+      6770189700,
+      7697486600
+    ],
+    "median_ns": 6598362400.0,
+    "iqr_ns": 147247600.0
+  },
   "final_loss": 0.4984842472518992,
+  "metrics": {
+    "rmse": 1.0125202550647656,
+    "mae": 0.806573090482756,
+    "r2": -0.0008878872500843737
+  },
+  "predict_timing": {
+    "warmup": 1,
+    "repeats": 7,
+    "samples_ns": [
+      81300,
+      52200,
+      42400,
+      41700,
+      40700,
+      39400,
+      46900
+    ],
+    "median_ns": 42400.0,
+    "iqr_ns": 8350.0
+  },
+  "m_train": 10000,
+  "m_test": 2000,
+  "train_sha256": "b776e6a571424e65490788df17ddb0a60cd642cd2e4105c4a1ae0604900e65be",
+  "test_sha256": "b104517c357c0d238793d49051a652e912cf3a1ff9032c55c7f2ee4a7ec3959b",
   "comparisons": {
-    "rel_w_sv_dir": 5.603647608445756e-15,
+    "rel_w_sv_dir": 5.603647608445758e-15,
     "rel_w_sv_sk": 0.0,
-    "speedup_direct_over_scaled": 3446.0444307629164
+    "speedup_direct_over_scaled": 3197.897188560349
   }
 }

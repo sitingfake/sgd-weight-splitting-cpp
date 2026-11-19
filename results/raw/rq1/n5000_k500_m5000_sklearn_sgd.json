@@ -17,26 +17,38 @@
   "timing": {
     "warmup": 1,
     "repeats": 7,
-    "loop_ns": [
-      13430819,
-      13390979,
-      17525699,
-      14086440,
-      13483049,
-      13451220,
-      15529769
+    "samples_ns": [
+      12150300,
+      11971000,
+      12320700,
+      12996300,
+      12372600,
+      12351200,
+      12415000
     ],
-    "median_ns": 13483049,
-    "iqr_ns": 1367084,
-    "min_ns": 13390979,
-    "max_ns": 17525699,
-    "us_per_update": 0.8988699999463281,
-    "finalize_ns": 0,
-    "slope_s_per_epoch": 0.00449434999973164,
-    "overhead_s": 0.0051345500018214665,
-    "linear_fit_r2_median": 0.9936591979090075
+    "median_ns": 12351200.0,
+    "iqr_ns": 158300.0,
+    "scope": "fit",
+    "min_ns": 11971000,
+    "max_ns": 12996300,
+    "us_per_update": 0.8234133333333333
   },
-  "n_resets": 0,
+  "fit_timing": {
+    "warmup": 1,
+    "repeats": 7,
+    "samples_ns": [
+      12150300,
+      11971000,
+      12320700,
+      12996300,
+      12372600,
+      12351200,
+      12415000
+    ],
+    "median_ns": 12351200.0,
+    "iqr_ns": 158300.0
+  },
+  "n_resets": null,
   "diverged": false,
   "diverged_epoch": 0,
   "b": 0.0,
@@ -45,9 +57,33 @@
     "flags": "bundled wheel"
   },
   "final_loss": 0.4870332608813681,
+  "metrics": {
+    "rmse": 1.0113582755556902,
+    "mae": 0.8079564284577065,
+    "r2": 0.00585592350274744
+  },
+  "predict_timing": {
+    "warmup": 1,
+    "repeats": 7,
+    "samples_ns": [
+      350700,
+      331900,
+      317300,
+      316200,
+      344600,
+      357700,
+      316200
+    ],
+    "median_ns": 331900.0,
+    "iqr_ns": 30900.0
+  },
+  "m_train": 5000,
+  "m_test": 1000,
+  "train_sha256": "1dd6fae5fc313f79eb9706f5a77b730ff4be215318fc70a4fc209c6d6f7ac4f9",
+  "test_sha256": "e70e7f0e82b80515d4d384343b0de61d74a7978a7d7d2e8756e3c508d5a5692b",
   "comparisons": {
     "rel_w_sv_dir": 5.386717378471839e-15,
     "rel_w_sv_sk": 0.0,
-    "speedup_direct_over_scaled": 2.593681138705259
+    "speedup_direct_over_scaled": 2.949724266938756
   }
 }

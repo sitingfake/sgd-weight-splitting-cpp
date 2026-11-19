@@ -19,37 +19,85 @@
     "warmup": 1,
     "repeats": 7,
     "loop_ns": [
-      62997800,
-      63160300,
-      60358700,
-      59978700,
-      60208500,
-      61669200,
-      62535000
+      59996700,
+      57652300,
+      57580900,
+      57530400,
+      57980400,
+      59107300,
+      61561300
     ],
-    "median_ns": 61669200,
-    "iqr_ns": 2789300,
-    "min_ns": 59978700,
-    "max_ns": 63160300,
-    "us_per_update": 4.11128,
+    "fit_ns": [
+      59998500,
+      57670300,
+      57582400,
+      57531800,
+      57981900,
+      59108500,
+      61562800
+    ],
+    "median_ns": 57980400,
+    "iqr_ns": 2415800,
+    "min_ns": 57530400,
+    "max_ns": 61561300,
+    "us_per_update": 3.86536,
     "finalize_ns": 0
   },
   "n_resets": 0,
   "diverged": false,
   "diverged_epoch": 0,
   "b": 0,
-  "w_file": "C:/Users/ADMIN/AppData/Local/Temp/tmpirklgkeu/w.bin",
+  "w_file": "C:/Users/ADMIN/AppData/Local/Temp/tmpnt1tnp0u/w.bin",
   "w_sha256": "",
   "build": {
     "compiler": "g++ 14.2.0",
     "flags": "-std=c++17 -O2 -DNDEBUG -Wall -Wextra"
   },
-  "git_commit": "7009555db62687232285404fd9dbff90e01d8204",
+  "git_commit": "a3714955ede0fe8f25b8b4b74776e447d7470d5c",
   "dirty": true,
+  "fit_timing": {
+    "warmup": 1,
+    "repeats": 7,
+    "samples_ns": [
+      59998500,
+      57670300,
+      57582400,
+      57531800,
+      57981900,
+      59108500,
+      61562800
+    ],
+    "median_ns": 57981900.0,
+    "iqr_ns": 1927150.0
+  },
   "final_loss": 0.4669060952152052,
+  "metrics": {
+    "rmse": 0.9966369533143611,
+    "mae": 0.7977339551713909,
+    "r2": 0.006732511007750075
+  },
+  "predict_timing": {
+    "warmup": 1,
+    "repeats": 7,
+    "samples_ns": [
+      2058800,
+      2174000,
+      2024000,
+      1894400,
+      1830100,
+      1808600,
+      1778800
+    ],
+    "median_ns": 1894400.0,
+    "iqr_ns": 222050.0
+  },
+  "m_train": 5000,
+  "m_test": 1000,
+  "train_sha256": "fffb4ce83af01a761ffc147bd0e34354630352ba301dddf72d2e93c50f05fade",
+  "test_sha256": "1302542c7b69cbe39d7a79cdd5845b27b20b25d7044dc9f5a0cc7eee26dbdddb",
   "comparisons": {
     "rel_w_sv_dir": 6.326112989666963e-15,
     "rel_w_sv_sk": 0.0,
-    "speedup_direct_over_scaled": 1.3176137783978616
+    "speedup_direct_over_scaled": 1.0755914042325845
   }
 }

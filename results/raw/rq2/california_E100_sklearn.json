@@ -1,17 +1,53 @@
 {
-  "impl": "sklearn_sgd",
   "dataset": "california",
-  "epochs": 100,
   "m_train": 16512,
   "m_test": 4128,
   "n": 8,
-  "alpha": 0.0001,
+  "train_sha256": "34f8db11aec88abc1ab3ffbf46061e408c0e2396d6aa312e31da476807350adc",
+  "test_sha256": "46c1c4528df205576d41710b7801bcd95f757f55a10f68b75c2edf45fb48239c",
   "metrics": {
     "rmse": 0.7423928990006282,
     "mae": 0.5348096799527199,
     "r2": 0.5794082415198192
   },
+  "predict_timing": {
+    "warmup": 1,
+    "repeats": 7,
+    "samples_ns": [
+      13000,
+      12700,
+      12700,
+      12200,
+      11800,
+      11700,
+      11700
+    ],
+    "median_ns": 12200.0,
+    "iqr_ns": 950.0
+  },
+  "fit_timing": {
+    "warmup": 1,
+    "repeats": 7,
+    "samples_ns": [
+      83560800,
+      85085900,
+      81101500,
+      81479900,
+      82356500,
+      82565900,
+      81811600
+    ],
+    "median_ns": 82356500.0,
+    "iqr_ns": 1417600.0
+  },
+  "train_time_ms": 82.3565,
   "distance_to_ridge": 0.021687112100652797,
-  "train_time_ms": 78.87779999873601,
-  "b": 0.0016720258005662228
+  "b": 0.0016720258005662228,
+  "epochs": 100,
+  "alpha": 0.0001,
+  "fit_intercept": true,
+  "eta0": 0.01,
+  "power_t": 0.25,
+  "schedule": "invscaling",
+  "impl": "sklearn_sgd"
 }

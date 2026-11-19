@@ -1,0 +1,94 @@
+{
+  "dataset": "california",
+  "m_train": 16512,
+  "m_test": 4128,
+  "n": 8,
+  "train_sha256": "34f8db11aec88abc1ab3ffbf46061e408c0e2396d6aa312e31da476807350adc",
+  "test_sha256": "46c1c4528df205576d41710b7801bcd95f757f55a10f68b75c2edf45fb48239c",
+  "metrics": {
+    "rmse": 0.7444057552873138,
+    "mae": 0.5340582808445036,
+    "r2": 0.5771244415245409
+  },
+  "predict_timing": {
+    "warmup": 1,
+    "repeats": 7,
+    "samples_ns": [
+      19100,
+      24400,
+      29500,
+      17900,
+      18000,
+      17300,
+      18000
+    ],
+    "median_ns": 18000.0,
+    "iqr_ns": 3800.0
+  },
+  "fit_timing": {
+    "warmup": 1,
+    "repeats": 7,
+    "samples_ns": [
+      246784000,
+      250249700,
+      251438400,
+      252053300,
+      250411600,
+      246527200,
+      246386500
+    ],
+    "median_ns": 250249700.0,
+    "iqr_ns": 4269400.0
+  },
+  "train_time_ms": 250.2497,
+  "distance_to_ridge": 0.015453942858587403,
+  "b": 0.0009957828277919925,
+  "epochs": 500,
+  "alpha": 0.0001,
+  "fit_intercept": true,
+  "eta0": 0.01,
+  "power_t": 0.25,
+  "schedule": "invscaling",
+  "impl": "cpp_direct",
+  "timing": {
+    "warmup": 1,
+    "repeats": 7,
+    "loop_ns": [
+      246782900,
+      250248400,
+      251437700,
+      252051400,
+      250410500,
+      246526800,
+      246386000
+    ],
+    "fit_ns": [
+      246784000,
+      250249700,
+      251438400,
+      252053300,
+      250411600,
+      246527200,
+      246386500
+    ],
+    "median_ns": 250248400,
+    "iqr_ns": 4910900,
+    "min_ns": 246386000,
+    "max_ns": 252051400,
+    "us_per_update": 0.03031109496124031,
+    "finalize_ns": 0
+  },
+  "build": {
+    "compiler": "g++ 14.2.0",
+    "flags": "-std=c++17 -O2 -DNDEBUG -Wall -Wextra"
+  },
+  "n_resets": 0,
+  "equivalence": {
+    "rel_rmse": 8.948531228348572e-16,
+    "rel_mae": 4.1576848986203013e-16,
+    "diff_r2": 6.661338147750939e-16,
+    "rel_w": 1.3951092596749218e-14,
+    "rel_dist_to_ridge": 9.148471984517601e-14,
+    "passed": true
+  }
+}

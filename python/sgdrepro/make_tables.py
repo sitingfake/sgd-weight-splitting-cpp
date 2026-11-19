@@ -104,61 +104,67 @@ def make_rq1_tables(raw_dir: Path, out_dir: Path):
     ])
 
 
-def make_rq2_tables(raw_dir: Path, out_dir: Path):
-    """Generate Tables for RQ2 housing datasets."""
-    out_dir.mkdir(parents=True, exist_ok=True)
+MODEL_NAMES = {
+    "cpp_direct": "C++ Direct",
+    "cpp_scaled": "C++ Scaled",
+    "sklearn_sgd": "scikit-learn SGD",
+    "ridge_reference": "Ridge Reference",
+}
+EVALUATION_COLUMNS = [
+    ("epochs", "Epochs"), ("model", "Model"),
+    ("m_train", "Train samples"), ("m_test", "Test samples"),
+    ("fit_ms", "Fit median (ms)"), ("fit_iqr_ms", "Fit IQR (ms)"),
+    ("predict_us", "Predict median (us/batch)"), ("predict_iqr_us", "Predict IQR (us/batch)"),
+    ("rmse", "RMSE"), ("mae", "MAE"), ("r2", "R^2"),
+]
 
-    for ds in ["taiwan", "california", "kingcounty"]:
-        ridge_file = raw_dir / f"{ds}_ridge.json"
-        if not ridge_file.exists():
-            continue
-        d_ridge = load_json(ridge_file)
 
-        rows = [{
-            "Epochs": "-",
-            "Model": "Ridge Reference",
-            "RMSE": f"{d_ridge['metrics']['rmse']:.4f}",
-            "MAE": f"{d_ridge['metrics']['mae']:.4f}",
-            "R2": f"{d_ridge['metrics']['r2']:.4f}",
-            "Dist_to_Ridge": "0.0000",
-            "Train_Time_ms": f"{d_ridge['train_time_ms']:.2f}",
-        }]
+def evaluation_row(record):
+    fit = record["fit_timing"]
+    pred = record["predict_timing"]
+    epochs = record.get("epochs", record.get("params", {}).get("epochs", "-"))
+    return {
+        "epochs": epochs,
+        "model": MODEL_NAMES[record["impl"]],
+        "m_train": record["m_train"],
+        "m_test": record["m_test"],
+        "fit_ms": fit["median_ns"] / 1e6,
+        "fit_iqr_ms": fit["iqr_ns"] / 1e6,
+        "predict_us": pred["median_ns"] / 1e3,
+        "predict_iqr_us": pred["iqr_ns"] / 1e3,
+        **record["metrics"],
+    }
 
-        for E in [1, 5, 20, 100, 500]:
-            f_sk = raw_dir / f"{ds}_E{E}_sklearn.json"
-            f_sc = raw_dir / f"{ds}_E{E}_cpp_scaled.json"
-            if not (f_sk.exists() and f_sc.exists()):
-                continue
 
-            d_sk = load_json(f_sk)
-            d_sc = load_json(f_sc)
-
-            rows.append({
-                "Epochs": str(E),
-                "Model": "scikit-learn SGD",
-                "RMSE": f"{d_sk['metrics']['rmse']:.4f}",
-                "MAE": f"{d_sk['metrics']['mae']:.4f}",
-                "R2": f"{d_sk['metrics']['r2']:.4f}",
-                "Dist_to_Ridge": f"{d_sk['distance_to_ridge']:.4f}",
-                "Train_Time_ms": f"{d_sk['train_time_ms']:.2f}",
-            })
-            rows.append({
-                "Epochs": str(E),
-                "Model": "C++ Scaled",
-                "RMSE": f"{d_sc['metrics']['rmse']:.4f}",
-                "MAE": f"{d_sc['metrics']['mae']:.4f}",
-                "R2": f"{d_sc['metrics']['r2']:.4f}",
-                "Dist_to_Ridge": f"{d_sc['distance_to_ridge']:.4f}",
-                "Train_Time_ms": f"{d_sc['train_time_ms']:.2f}",
-            })
-
-        df_ds = pd.DataFrame(rows)
-        save_table(df_ds, out_dir / f"rq2_{ds}", [
-            ("Epochs", "Epochs"), ("Model", "Model"),
-            ("RMSE", "RMSE"), ("MAE", "MAE"), ("R2", "R^2"),
-            ("Dist_to_Ridge", "||w - w_ridge|| / ||w_ridge||"),
-            ("Train_Time_ms", "Time (ms)")
+def make_rq1_evaluation_table(raw_dir: Path, out_dir: Path):
+    rows = []
+    for path in sorted(raw_dir.glob("*.json")):
+        record = load_json(path)
+        if "predict_timing" in record:
+            dataset = path.stem.removesuffix("_" + record["impl"])
+            rows.append({"dataset": dataset, **evaluation_row(record)})
+    if rows:
+        save_table(pd.DataFrame(rows), out_dir / "rq1_paired", [
+            ("dataset", "Configuration"), *EVALUATION_COLUMNS,
         ])
+
+
+def make_rq2_tables(raw_dir: Path, out_dir: Path):
+    """Generate fit and held-out metrics for every housing model and epoch."""
+    out_dir.mkdir(parents=True, exist_ok=True)
+    for ds in ["taiwan", "california", "kingcounty"]:
+        records = [
+            load_json(path) for path in raw_dir.glob(f"{ds}_*.json")
+        ]
+        records.sort(key=lambda record: (record.get("epochs", 0), record["impl"]))
+        rows = [
+            {**evaluation_row(record), "distance_to_ridge": record["distance_to_ridge"]}
+            for record in records if "predict_timing" in record
+        ]
+        if rows:
+            save_table(pd.DataFrame(rows), out_dir / f"rq2_{ds}", [
+                *EVALUATION_COLUMNS, ("distance_to_ridge", "Relative distance to Ridge"),
+            ])
 
 
 def make_equivalence_summary(raw_rq2_dir: Path, out_dir: Path):
@@ -166,14 +172,15 @@ def make_equivalence_summary(raw_rq2_dir: Path, out_dir: Path):
     out_dir.mkdir(parents=True, exist_ok=True)
     rows = []
 
-    for f_sc in sorted(raw_rq2_dir.glob("*_cpp_scaled.json")):
-        d_sc = load_json(f_sc)
+    for path in sorted(raw_rq2_dir.glob("*_cpp_*.json")):
+        d_sc = load_json(path)
         ds = d_sc["dataset"]
         e = d_sc["epochs"]
         eq = d_sc.get("equivalence", {})
 
         rows.append({
             "Dataset": ds,
+            "Model": MODEL_NAMES[d_sc["impl"]],
             "Epochs": e,
             "Rel_RMSE": f"{eq.get('rel_rmse', 0.0):.2e}",
             "Rel_MAE": f"{eq.get('rel_mae', 0.0):.2e}",
@@ -186,7 +193,7 @@ def make_equivalence_summary(raw_rq2_dir: Path, out_dir: Path):
     df = pd.DataFrame(rows)
     if not df.empty:
         save_table(df, out_dir / "equivalence_summary", [
-            ("Dataset", "Dataset"), ("Epochs", "Epochs"),
+            ("Dataset", "Dataset"), ("Model", "Model"), ("Epochs", "Epochs"),
             ("Rel_RMSE", "|dRMSE| / RMSE"), ("Rel_MAE", "|dMAE| / MAE"),
             ("Diff_R2", "|dR^2|"), ("Rel_W", "||dw|| / ||w||"),
             ("Threshold", "Threshold"), ("Status", "Status")
@@ -255,6 +262,7 @@ def main():
 
     print("Generating RQ1 summary tables...")
     make_rq1_tables(raw_rq1, tables_dir)
+    make_rq1_evaluation_table(raw_rq1, tables_dir)
     print("Generating RQ2 summary tables...")
     make_rq2_tables(raw_rq2, tables_dir)
     print("Generating equivalence summary table...")

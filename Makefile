@@ -6,7 +6,7 @@ SHELL := bash
 .SHELLFLAGS := -euo pipefail -c
 
 ifeq ($(OS),Windows_NT)
-    PYTHON := .venv\Scripts\python.exe
+    PYTHON := .venv/Scripts/python.exe
     EXE_EXT := .exe
     BIN_DIR := build
     CPP_TARGET := $(BIN_DIR)\sgd_cpp$(EXE_EXT)
@@ -20,7 +20,13 @@ endif
 # C++ Compiler and flags
 CXX ?= g++
 CXXFLAGS ?= -std=c++17 -O2 -DNDEBUG -Wall -Wextra -Icpp/include
+ifeq ($(OS),Windows_NT)
+    LDFLAGS += -static
+endif
 CPP_TARGET := build/sgd_cpp$(EXE_EXT)
+MKDIR_P ?= mkdir -p
+RM_RF ?= rm -rf
+export PYTHONPATH := $(CURDIR)/python
 
 # Concurrency environment flags (single-threaded for benchmarking)
 export OMP_NUM_THREADS := 1
@@ -31,7 +37,7 @@ export NUMEXPR_NUM_THREADS := 1
 
 .PHONY: all setup build test data data-quick smoke pilot rq1 rq2 report verify clean distclean
 
-all: setup build test data rq1 rq2 report
+all: setup build data test rq1 rq2 report
 
 setup:
 	@echo "==> Setting up environment..."
@@ -39,10 +45,10 @@ setup:
 
 build: $(CPP_TARGET)
 
-$(CPP_TARGET): cpp/src/main.cpp $(wildcard cpp/include/*.hpp)
+$(CPP_TARGET): cpp/src/main.cpp $(wildcard cpp/include/*.hpp) Makefile
 	@echo "==> Compiling C++ binary: $@"
 	@$(MKDIR_P) build
-	$(CXX) $(CXXFLAGS) -o $(CPP_TARGET) cpp/src/main.cpp
+	$(CXX) $(CXXFLAGS) -o $(CPP_TARGET) cpp/src/main.cpp $(LDFLAGS)
 
 test: build
 	@echo "==> Running pytest test suite..."

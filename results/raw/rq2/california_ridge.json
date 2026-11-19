@@ -1,17 +1,49 @@
 {
-  "impl": "ridge_reference",
   "dataset": "california",
   "m_train": 16512,
   "m_test": 4128,
   "n": 8,
-  "alpha_sgd": 0.0001,
-  "alpha_ridge": 1.6512,
+  "train_sha256": "34f8db11aec88abc1ab3ffbf46061e408c0e2396d6aa312e31da476807350adc",
+  "test_sha256": "46c1c4528df205576d41710b7801bcd95f757f55a10f68b75c2edf45fb48239c",
   "metrics": {
     "rmse": 0.7455407858755695,
     "mae": 0.5331886933314122,
     "r2": 0.5758339017562956
   },
+  "predict_timing": {
+    "warmup": 1,
+    "repeats": 7,
+    "samples_ns": [
+      19800,
+      21800,
+      19400,
+      12500,
+      11600,
+      11700,
+      11600
+    ],
+    "median_ns": 12500.0,
+    "iqr_ns": 7950.0
+  },
+  "fit_timing": {
+    "warmup": 1,
+    "repeats": 7,
+    "samples_ns": [
+      1249500,
+      1190400,
+      1152200,
+      1759800,
+      1620500,
+      1234800,
+      1145900
+    ],
+    "median_ns": 1234800.0,
+    "iqr_ns": 263700.0
+  },
+  "train_time_ms": 1.2348,
   "distance_to_ridge": 0.0,
-  "train_time_ms": 1.793399998859968,
-  "b": -2.2218774366498255e-13
+  "b": -2.2218774366498255e-13,
+  "impl": "ridge_reference",
+  "alpha_sgd": 0.0001,
+  "alpha_ridge": 1.6512
 }

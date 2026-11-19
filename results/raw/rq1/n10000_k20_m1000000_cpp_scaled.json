@@ -19,37 +19,85 @@
     "warmup": 1,
     "repeats": 7,
     "loop_ns": [
-      110691600,
-      110411100,
-      110290000,
-      110724500,
-      120349700,
-      121408100,
-      113826200
+      116672500,
+      115439500,
+      115055500,
+      115266200,
+      114212900,
+      114081200,
+      114154100
     ],
-    "median_ns": 110724500,
-    "iqr_ns": 9938600,
-    "min_ns": 110290000,
-    "max_ns": 121408100,
-    "us_per_update": 0.03690816666666667,
-    "finalize_ns": 39900
+    "fit_ns": [
+      116725200,
+      115470800,
+      115064600,
+      115275100,
+      114221800,
+      114092800,
+      114202900
+    ],
+    "median_ns": 115055500,
+    "iqr_ns": 1285400,
+    "min_ns": 114081200,
+    "max_ns": 116672500,
+    "us_per_update": 0.038351833333333335,
+    "finalize_ns": 46500
   },
   "n_resets": 0,
   "diverged": false,
   "diverged_epoch": 0,
   "b": 0,
-  "w_file": "C:/Users/ADMIN/AppData/Local/Temp/tmptzsgjnu7/w.bin",
+  "w_file": "C:/Users/ADMIN/AppData/Local/Temp/tmpidl66k9z/w.bin",
   "w_sha256": "",
   "build": {
     "compiler": "g++ 14.2.0",
     "flags": "-std=c++17 -O2 -DNDEBUG -Wall -Wextra"
   },
-  "git_commit": "7009555db62687232285404fd9dbff90e01d8204",
+  "git_commit": "a3714955ede0fe8f25b8b4b74776e447d7470d5c",
   "dirty": true,
+  "fit_timing": {
+    "warmup": 1,
+    "repeats": 7,
+    "samples_ns": [
+      116725200,
+      115470800,
+      115064600,
+      115275100,
+      114221800,
+      114092800,
+      114202900
+    ],
+    "median_ns": 115064600.0,
+    "iqr_ns": 1160600.0
+  },
   "final_loss": 0.42473017329106244,
+  "metrics": {
+    "rmse": 0.9196789429391915,
+    "mae": 0.7336012794975666,
+    "r2": 0.1654584270185231
+  },
+  "predict_timing": {
+    "warmup": 1,
+    "repeats": 7,
+    "samples_ns": [
+      3881700,
+      3574400,
+      3620800,
+      3438800,
+      3382500,
+      3268900,
+      3317900
+    ],
+    "median_ns": 3438800.0,
+    "iqr_ns": 247400.0
+  },
+  "m_train": 1000000,
+  "m_test": 200000,
+  "train_sha256": "d505e0682228d4866beab10624fefb74162aee80bb9414c9021688ce36820368",
+  "test_sha256": "0760404fdbe7fcedc08fb3116c5c2c34ec2518ddedb5f8cb6a3f513783da29a3",
   "comparisons": {
     "rel_w_sv_dir": 5.113053618263267e-14,
     "rel_w_sv_sk": 0.0,
-    "speedup_direct_over_scaled": 57.069612416402876
+    "speedup_direct_over_scaled": 62.29920168961936
   }
 }

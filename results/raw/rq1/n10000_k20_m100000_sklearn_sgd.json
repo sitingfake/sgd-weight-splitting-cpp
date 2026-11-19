@@ -17,26 +17,38 @@
   "timing": {
     "warmup": 1,
     "repeats": 7,
-    "loop_ns": [
-      25178700,
-      23114669,
-      22692269,
-      20496539,
-      34624530,
-      25033499,
-      16487459
+    "samples_ns": [
+      21390400,
+      22534300,
+      21796000,
+      22605100,
+      22050100,
+      21599200,
+      22365300
     ],
-    "median_ns": 23114669,
-    "iqr_ns": 3511695,
-    "min_ns": 16487459,
-    "max_ns": 34624530,
-    "us_per_update": 0.07704889999877197,
-    "finalize_ns": 0,
-    "slope_s_per_epoch": 0.007704889999877197,
-    "overhead_s": 0.0040619699990202054,
-    "linear_fit_r2_median": 0.9788653832919619
+    "median_ns": 22050100.0,
+    "iqr_ns": 752200.0,
+    "scope": "fit",
+    "min_ns": 21390400,
+    "max_ns": 22605100,
+    "us_per_update": 0.07350033333333333
   },
-  "n_resets": 0,
+  "fit_timing": {
+    "warmup": 1,
+    "repeats": 7,
+    "samples_ns": [
+      21390400,
+      22534300,
+      21796000,
+      22605100,
+      22050100,
+      21599200,
+      22365300
+    ],
+    "median_ns": 22050100.0,
+    "iqr_ns": 752200.0
+  },
+  "n_resets": null,
   "diverged": false,
   "diverged_epoch": 0,
   "b": 0.0,
@@ -45,9 +57,33 @@
     "flags": "bundled wheel"
   },
   "final_loss": 0.4874002303230721,
+  "metrics": {
+    "rmse": 0.9744325605085882,
+    "mae": 0.7770630710186288,
+    "r2": 0.03288432372634409
+  },
+  "predict_timing": {
+    "warmup": 1,
+    "repeats": 7,
+    "samples_ns": [
+      181600,
+      181400,
+      193200,
+      182300,
+      180700,
+      178500,
+      181100
+    ],
+    "median_ns": 181400.0,
+    "iqr_ns": 1050.0
+  },
+  "m_train": 100000,
+  "m_test": 20000,
+  "train_sha256": "ea2463d7d654a20658438bb7de664192d42ce1643d7274741ce989a6b48799af",
+  "test_sha256": "f980db286d4e595789def96b19c55ede4bf96a88b39e35c2e1d12b8dc356b36b",
   "comparisons": {
     "rel_w_sv_dir": 1.6573720872674554e-14,
     "rel_w_sv_sk": 0.0,
-    "speedup_direct_over_scaled": 57.30183274052529
+    "speedup_direct_over_scaled": 56.75011298483788
   }
 }

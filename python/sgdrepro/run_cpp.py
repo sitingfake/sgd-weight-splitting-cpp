@@ -13,6 +13,8 @@ from pathlib import Path
 from typing import Any, Dict, Optional, Tuple
 import numpy as np
 
+from sgdrepro.evaluation import timing_summary
+
 CPP_BIN_DEFAULT = Path("build/sgd_cpp.exe" if os.name == "nt" else "build/sgd_cpp")
 
 
@@ -127,6 +129,9 @@ def run_cpp_sgd(
             data = json.load(f)
 
         data.update(get_git_provenance())
+        timing = data["timing"]
+        if timing.get("fit_ns"):
+            data["fit_timing"] = timing_summary(timing["fit_ns"], warmup)
 
         w = None
         if dump_w and w_out_path.exists() and not data.get("diverged", False):

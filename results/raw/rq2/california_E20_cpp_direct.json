@@ -1,0 +1,94 @@
+{
+  "dataset": "california",
+  "m_train": 16512,
+  "m_test": 4128,
+  "n": 8,
+  "train_sha256": "34f8db11aec88abc1ab3ffbf46061e408c0e2396d6aa312e31da476807350adc",
+  "test_sha256": "46c1c4528df205576d41710b7801bcd95f757f55a10f68b75c2edf45fb48239c",
+  "metrics": {
+    "rmse": 0.7403993050202458,
+    "mae": 0.5356248573664373,
+    "r2": 0.5816640911523991
+  },
+  "predict_timing": {
+    "warmup": 1,
+    "repeats": 7,
+    "samples_ns": [
+      21600,
+      28000,
+      27400,
+      16100,
+      15500,
+      15100,
+      15200
+    ],
+    "median_ns": 16100.0,
+    "iqr_ns": 9150.0
+  },
+  "fit_timing": {
+    "warmup": 1,
+    "repeats": 7,
+    "samples_ns": [
+      9837300,
+      9868700,
+      9957800,
+      9963600,
+      9962300,
+      9956300,
+      9898500
+    ],
+    "median_ns": 9956300.0,
+    "iqr_ns": 76450.0
+  },
+  "train_time_ms": 9.9563,
+  "distance_to_ridge": 0.02731428601315645,
+  "b": 0.002693466321668477,
+  "epochs": 20,
+  "alpha": 0.0001,
+  "fit_intercept": true,
+  "eta0": 0.01,
+  "power_t": 0.25,
+  "schedule": "invscaling",
+  "impl": "cpp_direct",
+  "timing": {
+    "warmup": 1,
+    "repeats": 7,
+    "loop_ns": [
+      9836500,
+      9868400,
+      9957600,
+      9963400,
+      9962000,
+      9956200,
+      9898500
+    ],
+    "fit_ns": [
+      9837300,
+      9868700,
+      9957800,
+      9963600,
+      9962300,
+      9956300,
+      9898500
+    ],
+    "median_ns": 9956200,
+    "iqr_ns": 93600,
+    "min_ns": 9836500,
+    "max_ns": 9963400,
+    "us_per_update": 0.030148376937984493,
+    "finalize_ns": 0
+  },
+  "build": {
+    "compiler": "g++ 14.2.0",
+    "flags": "-std=c++17 -O2 -DNDEBUG -Wall -Wextra"
+  },
+  "n_resets": 0,
+  "equivalence": {
+    "rel_rmse": 1.4994922565395952e-16,
+    "rel_mae": 6.218286974677987e-16,
+    "diff_r2": 2.220446049250313e-16,
+    "rel_w": 9.244038237894188e-15,
+    "rel_dist_to_ridge": 7.748189499342339e-15,
+    "passed": true
+  }
+}

@@ -11,6 +11,11 @@ import numpy as np
 from sklearn.linear_model import Ridge
 
 
+def make_ridge_reference(m_train: int, alpha_sgd: float) -> Ridge:
+    """Build a Cholesky estimator with the same objective as SGD."""
+    return Ridge(alpha=m_train * alpha_sgd, fit_intercept=True, solver="cholesky")
+
+
 def fit_ridge_reference(
     X_train: np.ndarray,
     y_train_std: np.ndarray,
@@ -35,11 +40,8 @@ def fit_ridge_reference(
     b_ridge : float
         Fitted intercept term.
     """
-    m_train = X_train.shape[0]
-    alpha_ridge = m_train * alpha_sgd
-
     # Cholesky solver computes exact closed-form solution: (X^T X + alpha I)^(-1) X^T y
-    clf = Ridge(alpha=alpha_ridge, fit_intercept=True, solver="cholesky")
+    clf = make_ridge_reference(X_train.shape[0], alpha_sgd)
     clf.fit(X_train, y_train_std)
 
     w_ridge = np.ascontiguousarray(clf.coef_, dtype=np.float64)
